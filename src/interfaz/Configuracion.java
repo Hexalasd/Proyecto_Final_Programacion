@@ -60,8 +60,8 @@ public class Configuracion extends javax.swing.JFrame {
         jugarsombra = new javax.swing.JLabel();
         jugar = new javax.swing.JLabel();
         jugarText1 = new javax.swing.JLabel();
-        jugarsombra1 = new javax.swing.JLabel();
         jugarbase1 = new javax.swing.JLabel();
+        jugarsombra1 = new javax.swing.JLabel();
         jugar1 = new javax.swing.JLabel();
         exitBo1 = new javax.swing.JLabel();
         menuText = new javax.swing.JLabel();
@@ -82,7 +82,7 @@ public class Configuracion extends javax.swing.JFrame {
                 editarJugadoresActionPerformed(evt);
             }
         });
-        jPanel1.add(editarJugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 500, 320, 120));
+        jPanel1.add(editarJugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 320, 120));
 
         editarJugadores1.setBorderPainted(false);
         editarJugadores1.setContentAreaFilled(false);
@@ -105,44 +105,44 @@ public class Configuracion extends javax.swing.JFrame {
         jugarText.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         jugarText.setForeground(new java.awt.Color(255, 255, 255));
         jugarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jugarText.setText("jugaores");
-        jPanel1.add(jugarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 300, 250, 70));
+        jugarText.setText("jugadores");
+        jPanel1.add(jugarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 300, 290, 70));
 
         jugarbase.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         jugarbase.setForeground(new java.awt.Color(0, 204, 204));
         jugarbase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jugarbase.setText("jugaores");
-        jPanel1.add(jugarbase, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 290, 250, 90));
+        jugarbase.setText("jugadores");
+        jPanel1.add(jugarbase, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 290, 290, 90));
 
         jugarsombra.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
         jugarsombra.setForeground(new java.awt.Color(30, 126, 126));
         jugarsombra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jugarsombra.setText("jugaores");
-        jPanel1.add(jugarsombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 300, 300, 80));
+        jugarsombra.setText("jugadores");
+        jPanel1.add(jugarsombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 300, 340, 80));
 
         jugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
         jPanel1.add(jugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 730, 170));
 
-        jugarText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        jugarText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
         jugarText1.setForeground(new java.awt.Color(255, 255, 255));
         jugarText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jugarText1.setText("categoria");
-        jPanel1.add(jugarText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 520, 310, 70));
+        jugarText1.setText("categorias");
+        jPanel1.add(jugarText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 310, 80));
 
-        jugarsombra1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
-        jugarsombra1.setForeground(new java.awt.Color(30, 126, 126));
-        jugarsombra1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jugarsombra1.setText("categoria");
-        jPanel1.add(jugarsombra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 520, 360, 80));
-
-        jugarbase1.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        jugarbase1.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
         jugarbase1.setForeground(new java.awt.Color(0, 204, 204));
         jugarbase1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jugarbase1.setText("categoria");
-        jPanel1.add(jugarbase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 510, 310, 90));
+        jugarbase1.setText("categorias");
+        jPanel1.add(jugarbase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 500, 310, 100));
+
+        jugarsombra1.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
+        jugarsombra1.setForeground(new java.awt.Color(30, 126, 126));
+        jugarsombra1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jugarsombra1.setText("categorias");
+        jPanel1.add(jugarsombra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 510, 360, 90));
 
         jugar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
-        jPanel1.add(jugar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 730, 170));
+        jPanel1.add(jugar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 730, 170));
 
         exitBo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/exitBtnBigger.png"))); // NOI18N
         jPanel1.add(exitBo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, 110));
@@ -166,7 +166,7 @@ public class Configuracion extends javax.swing.JFrame {
         jPanel1.add(menuTextShadow, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 930, 270));
 
         exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/FA_1.png"))); // NOI18N
-        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 1380, 990));
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 1440, 990));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/EnJuego.png"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 1920, 1080));
@@ -195,13 +195,13 @@ public class Configuracion extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void editarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editarJugadoresActionPerformed
-
     private void editarJugadores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadores1ActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_editarJugadores1ActionPerformed
+
+    private void editarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadoresActionPerformed
+
+    }//GEN-LAST:event_editarJugadoresActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
     /**

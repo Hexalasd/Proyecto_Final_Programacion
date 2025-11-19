@@ -19,7 +19,7 @@ private JLabel blackScreen;
 
 private void cargarFuentePixel() {
     try {
-        InputStream is = getClass().getResourceAsStream("/PixeloidSans.ttf");
+        InputStream is = getClass().getResourceAsStream("/fonts/PixeloidSans.ttf");
         pixeloidFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(24f);
 
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
