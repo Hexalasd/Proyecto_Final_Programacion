@@ -79,15 +79,15 @@
                   <Color blue="77" green="58" red="7" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Pixeloid Sans" size="36" style="1"/>
+                  <Font name="Pixeloid Sans" size="60" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="5">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                    <StringItem index="4" value="Item 5"/>
+                    <StringItem index="0" value="1-VALENTINA 3049 points"/>
+                    <StringItem index="1" value="2-ARTURO 1049 points"/>
+                    <StringItem index="2" value="3-TUKI 10 points"/>
+                    <StringItem index="3" value="4-HEXAL 5 points"/>
+                    <StringItem index="4" value="5-VALECATDOG 1 points"/>
                   </StringArray>
                 </Property>
                 <Property name="selectionMode" type="int" value="0"/>
@@ -109,7 +109,7 @@
               <Color blue="77" green="58" red="7" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Pixeloid Sans" size="48" style="0"/>
+              <Font name="Pixeloid Sans" size="48" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
