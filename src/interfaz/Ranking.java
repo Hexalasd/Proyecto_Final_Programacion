@@ -5,7 +5,10 @@
 package interfaz;
 
 import interfaz.clasesAuxiliares.AnimatorSwing;
+import interfaz.clasesAuxiliares.FadeOverlay;
+import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -21,6 +24,14 @@ public class Ranking extends javax.swing.JFrame {
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(rankinMenu, 2, 0.03);
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
+        // Fade de entrada al abrir la aplicación
+         FadeOverlay overlay = new FadeOverlay(10, 10, Color.WHITE, () -> {
+             // Esto se ejecuta cuando termina el fade
+             System.out.println("Fade completado!");
+         });
+         getLayeredPane().add(overlay, JLayeredPane.MODAL_LAYER);
+         overlay.setBounds(0, 0, getWidth(), getHeight());
+         overlay.start();
     }
 
     /**
@@ -34,6 +45,9 @@ public class Ranking extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
+        listaJug = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         menuText = new javax.swing.JLabel();
         menuTextBase = new javax.swing.JLabel();
         menuTextShadow = new javax.swing.JLabel();
@@ -55,23 +69,43 @@ public class Ranking extends javax.swing.JFrame {
         });
         jPanel1.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 110, 120));
 
+        jList1.setBackground(new java.awt.Color(7, 88, 119));
+        jList1.setFont(new java.awt.Font("Pixeloid Sans", 1, 36)); // NOI18N
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList1.setAutoscrolls(false);
+        jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jList1.setVisibleRowCount(4);
+        listaJug.setViewportView(jList1);
+
+        jPanel1.add(listaJug, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 1010, 540));
+
+        jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
+        jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Histroia", "informatica", "Item 4" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 110, 320, 100));
+
         menuText.setFont(new java.awt.Font("Pixeloid Sans", 0, 100)); // NOI18N
         menuText.setForeground(new java.awt.Color(255, 255, 255));
         menuText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuText.setText("RANKINGS");
-        jPanel1.add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 800, 190));
+        jPanel1.add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 800, 190));
 
         menuTextBase.setFont(new java.awt.Font("Pixeloid Sans", 0, 100)); // NOI18N
         menuTextBase.setForeground(new java.awt.Color(153, 153, 153));
         menuTextBase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuTextBase.setText("RANKINGS");
-        jPanel1.add(menuTextBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 800, 260));
+        jPanel1.add(menuTextBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 800, 260));
 
         menuTextShadow.setFont(new java.awt.Font("Pixeloid Sans", 0, 102)); // NOI18N
         menuTextShadow.setForeground(new java.awt.Color(59, 113, 118));
         menuTextShadow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuTextShadow.setText("RANKINGS");
-        jPanel1.add(menuTextShadow, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 930, 270));
+        jPanel1.add(menuTextShadow, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 930, 270));
 
         exitBo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/exitBtnBigger.png"))); // NOI18N
         jPanel1.add(exitBo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, 110));
@@ -147,7 +181,10 @@ public class Ranking extends javax.swing.JFrame {
     private javax.swing.JButton botonSalir;
     private javax.swing.JLabel exitBo;
     private javax.swing.JLabel fondo;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane listaJug;
     private javax.swing.JLabel menuText;
     private javax.swing.JLabel menuTextBase;
     private javax.swing.JLabel menuTextShadow;

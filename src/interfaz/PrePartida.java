@@ -4,8 +4,13 @@
  */
 package interfaz;
 
+import interfaz.Menu;
+import interfaz.Ranking;
 import interfaz.clasesAuxiliares.AnimatorSwing;
+import interfaz.clasesAuxiliares.FadeOverlay;
+import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -21,6 +26,15 @@ public class PrePartida extends javax.swing.JFrame {
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(configMenu, 2, 0.03);
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
+        
+        // Fade de entrada al abrir la aplicación
+         FadeOverlay overlay = new FadeOverlay(10, 10, Color.WHITE, () -> {
+             // Esto se ejecuta cuando termina el fade
+             System.out.println("Fade completado!");
+         });
+         getLayeredPane().add(overlay, JLayeredPane.MODAL_LAYER);
+         overlay.setBounds(0, 0, getWidth(), getHeight());
+         overlay.start();
     }
 
     /**
@@ -33,28 +47,36 @@ public class PrePartida extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         botonSalir = new javax.swing.JButton();
         iniciarPart = new javax.swing.JButton();
-        aniadirJug1 = new javax.swing.JButton();
+        eliminarJug = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        aniadirJug = new javax.swing.JButton();
         listaJug = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        exitBo = new javax.swing.JLabel();
+        eliminarJugador = new javax.swing.JLabel();
+        exitBo1 = new javax.swing.JLabel();
         ponerUrs1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jugarText = new javax.swing.JLabel();
         jugarbase = new javax.swing.JLabel();
         jugarsombra = new javax.swing.JLabel();
         jugar1 = new javax.swing.JLabel();
-        canttexto = new javax.swing.JLabel();
-        jugar2 = new javax.swing.JLabel();
         jugar = new javax.swing.JLabel();
         ponerUrs = new javax.swing.JLabel();
         canttexto1 = new javax.swing.JLabel();
         canttexto2 = new javax.swing.JLabel();
+        cattexto3 = new javax.swing.JLabel();
+        cattexto4 = new javax.swing.JLabel();
+        cattexto5 = new javax.swing.JLabel();
+        cattexto6 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
         menuText = new javax.swing.JLabel();
         menuTextBase = new javax.swing.JLabel();
         menuTextShadow = new javax.swing.JLabel();
+        ponerUrs2 = new javax.swing.JLabel();
+        ponerUrs3 = new javax.swing.JLabel();
         menuText1 = new javax.swing.JLabel();
         menuTextBase1 = new javax.swing.JLabel();
         configMenu = new javax.swing.JLabel();
@@ -62,12 +84,19 @@ public class PrePartida extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
         menuTextShadow1 = new javax.swing.JLabel();
         jugar3 = new javax.swing.JLabel();
+        jugar4 = new javax.swing.JLabel();
+        canttexto3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1930, 1030));
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
+        jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 600, 140, 50));
 
         botonSalir.setBorderPainted(false);
         botonSalir.setContentAreaFilled(false);
@@ -87,27 +116,41 @@ public class PrePartida extends javax.swing.JFrame {
                 iniciarPartActionPerformed(evt);
             }
         });
-        jPanel1.add(iniciarPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 680, 300, 110));
+        jPanel1.add(iniciarPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 680, 300, 110));
 
-        aniadirJug1.setBorderPainted(false);
-        aniadirJug1.setContentAreaFilled(false);
-        aniadirJug1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        aniadirJug1.addActionListener(new java.awt.event.ActionListener() {
+        eliminarJug.setBorderPainted(false);
+        eliminarJug.setContentAreaFilled(false);
+        eliminarJug.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminarJug.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aniadirJug1ActionPerformed(evt);
+                eliminarJugActionPerformed(evt);
             }
         });
-        jPanel1.add(aniadirJug1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 310, 120, 110));
+        jPanel1.add(eliminarJug, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 190, 120, 110));
 
-        jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(7, 88, 119));
+        jTextField1.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
         jTextField1.setBorder(null);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, 250, 70));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 330, 250, 70));
+
+        jPasswordField1.setBackground(new java.awt.Color(7, 88, 119));
+        jPasswordField1.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
+        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 250, 70));
+
+        aniadirJug.setBorderPainted(false);
+        aniadirJug.setContentAreaFilled(false);
+        aniadirJug.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        aniadirJug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aniadirJugActionPerformed(evt);
+            }
+        });
+        jPanel1.add(aniadirJug, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 120, 110));
 
         jList1.setBackground(new java.awt.Color(7, 88, 119));
         jList1.setFont(new java.awt.Font("Pixeloid Sans", 1, 36)); // NOI18N
@@ -122,127 +165,161 @@ public class PrePartida extends javax.swing.JFrame {
         jList1.setVisibleRowCount(4);
         listaJug.setViewportView(jList1);
 
-        jPanel1.add(listaJug, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 390, 430, 200));
+        jPanel1.add(listaJug, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 280, 430, 200));
 
-        exitBo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/exitBtnBigger.png"))); // NOI18N
-        jPanel1.add(exitBo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, 110));
+        eliminarJugador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/exitBtnBigger.png"))); // NOI18N
+        jPanel1.add(eliminarJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 185, 130, 110));
+
+        exitBo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/exitBtnBigger.png"))); // NOI18N
+        jPanel1.add(exitBo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, 110));
 
         ponerUrs1.setFont(new java.awt.Font("Pixeloid Sans", 0, 36)); // NOI18N
         ponerUrs1.setForeground(new java.awt.Color(255, 255, 255));
         ponerUrs1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ponerUrs1.setText("user passw");
-        jPanel1.add(ponerUrs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 430, 130));
-
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField2.setBorder(null);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 250, 70));
+        jPanel1.add(ponerUrs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 430, 130));
 
         jugarText.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         jugarText.setForeground(new java.awt.Color(255, 255, 255));
         jugarText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jugarText.setText("JUGAR");
-        jPanel1.add(jugarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 700, 200, 70));
+        jPanel1.add(jugarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 700, 200, 70));
 
         jugarbase.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         jugarbase.setForeground(new java.awt.Color(0, 204, 204));
         jugarbase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jugarbase.setText("JUGAR");
-        jPanel1.add(jugarbase, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 690, 200, 90));
+        jPanel1.add(jugarbase, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 690, 200, 90));
 
         jugarsombra.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
         jugarsombra.setForeground(new java.awt.Color(30, 126, 126));
         jugarsombra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jugarsombra.setText("JUGAR");
-        jPanel1.add(jugarsombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 700, 250, 80));
+        jPanel1.add(jugarsombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 700, 250, 80));
 
         jugar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
-        jPanel1.add(jugar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 630, 730, 170));
-
-        canttexto.setFont(new java.awt.Font("Pixeloid Sans", 0, 170)); // NOI18N
-        canttexto.setForeground(new java.awt.Color(255, 255, 255));
-        canttexto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        canttexto.setText("+");
-        jPanel1.add(canttexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(727, 300, 160, 130));
-
-        jugar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
-        jPanel1.add(jugar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 410, 310));
+        jPanel1.add(jugar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 730, 170));
 
         jugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/jugarBtn.png"))); // NOI18N
-        jPanel1.add(jugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 300, 130, 120));
+        jPanel1.add(jugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, 130, 120));
 
         ponerUrs.setFont(new java.awt.Font("Pixeloid Sans", 0, 36)); // NOI18N
         ponerUrs.setForeground(new java.awt.Color(255, 255, 255));
         ponerUrs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ponerUrs.setText("user name");
-        jPanel1.add(ponerUrs, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 430, 130));
+        jPanel1.add(ponerUrs, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 430, 130));
 
         canttexto1.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         canttexto1.setForeground(new java.awt.Color(255, 255, 255));
         canttexto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        canttexto1.setText("añadir jug");
-        jPanel1.add(canttexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 430, 130));
+        canttexto1.setText("mod jug:");
+        jPanel1.add(canttexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 430, 130));
 
         canttexto2.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         canttexto2.setForeground(new java.awt.Color(102, 102, 102));
         canttexto2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        canttexto2.setText("añadir jug");
-        jPanel1.add(canttexto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 430, 130));
+        canttexto2.setText("mod jug:");
+        jPanel1.add(canttexto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 430, 130));
+
+        cattexto3.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        cattexto3.setForeground(new java.awt.Color(255, 255, 255));
+        cattexto3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cattexto3.setText("categoria:");
+        jPanel1.add(cattexto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 550, 430, 130));
+
+        cattexto4.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        cattexto4.setForeground(new java.awt.Color(102, 102, 102));
+        cattexto4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cattexto4.setText("categoria:");
+        jPanel1.add(cattexto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 560, 430, 130));
+
+        cattexto5.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        cattexto5.setForeground(new java.awt.Color(255, 255, 255));
+        cattexto5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cattexto5.setText("rondas");
+        jPanel1.add(cattexto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, 430, 130));
+
+        cattexto6.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        cattexto6.setForeground(new java.awt.Color(102, 102, 102));
+        cattexto6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cattexto6.setText("rondas");
+        jPanel1.add(cattexto6, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 560, 430, 130));
+
+        jComboBox2.setBackground(new java.awt.Color(7, 88, 119));
+        jComboBox2.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6" }));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 600, 140, 50));
 
         menuText.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
         menuText.setForeground(new java.awt.Color(255, 255, 255));
         menuText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuText.setText("CONFIG");
-        jPanel1.add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 800, 190));
+        jPanel1.add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, -40, 800, 190));
 
         menuTextBase.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
         menuTextBase.setForeground(new java.awt.Color(153, 153, 153));
         menuTextBase.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuTextBase.setText("CONFIG");
-        jPanel1.add(menuTextBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 800, 260));
+        jPanel1.add(menuTextBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, -70, 800, 260));
 
         menuTextShadow.setFont(new java.awt.Font("Pixeloid Sans", 0, 74)); // NOI18N
         menuTextShadow.setForeground(new java.awt.Color(59, 113, 118));
         menuTextShadow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuTextShadow.setText("CONFIG");
-        jPanel1.add(menuTextShadow, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 930, 270));
+        jPanel1.add(menuTextShadow, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, -70, 930, 270));
+
+        ponerUrs2.setFont(new java.awt.Font("Pixeloid Sans", 0, 36)); // NOI18N
+        ponerUrs2.setForeground(new java.awt.Color(255, 255, 255));
+        ponerUrs2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ponerUrs2.setText("user name");
+        jPanel1.add(ponerUrs2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 430, 130));
+
+        ponerUrs3.setFont(new java.awt.Font("Pixeloid Sans", 0, 36)); // NOI18N
+        ponerUrs3.setForeground(new java.awt.Color(255, 255, 255));
+        ponerUrs3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ponerUrs3.setText("user passw");
+        jPanel1.add(ponerUrs3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 430, 130));
 
         menuText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
         menuText1.setForeground(new java.awt.Color(255, 255, 255));
         menuText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuText1.setText("JUGADORES");
-        jPanel1.add(menuText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 250, 800, 190));
+        jPanel1.add(menuText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 140, 800, 190));
 
         menuTextBase1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
         menuTextBase1.setForeground(new java.awt.Color(153, 153, 153));
         menuTextBase1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuTextBase1.setText("JUGADORES");
-        jPanel1.add(menuTextBase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 220, 800, 260));
+        jPanel1.add(menuTextBase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, 800, 260));
 
         configMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         configMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/MenuSmall.png"))); // NOI18N
-        jPanel1.add(configMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 1240, 530));
+        jPanel1.add(configMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 1240, 530));
 
         configMenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         configMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/17 nov 2025, 09_48_56.png"))); // NOI18N
         jPanel1.add(configMenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 1410, 880));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Desenfocado.png"))); // NOI18N
-        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 1920, 1080));
+        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 1920, 1080));
 
         menuTextShadow1.setFont(new java.awt.Font("Pixeloid Sans", 0, 74)); // NOI18N
         menuTextShadow1.setForeground(new java.awt.Color(59, 113, 118));
         menuTextShadow1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         menuTextShadow1.setText("CONFIG");
-        jPanel1.add(menuTextShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 930, 270));
+        jPanel1.add(menuTextShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, -10, 930, 270));
 
         jugar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
-        jPanel1.add(jugar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 410, 310));
+        jPanel1.add(jugar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 410, 310));
+
+        jugar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
+        jPanel1.add(jugar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 410, 310));
+
+        canttexto3.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
+        canttexto3.setForeground(new java.awt.Color(255, 255, 255));
+        canttexto3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        canttexto3.setText("añadir jug:");
+        jPanel1.add(canttexto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 430, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -267,20 +344,23 @@ public class PrePartida extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void iniciarPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarPartActionPerformed
-        // TODO add your handling code here:
+        Partida entrada = new Partida();
+        entrada.setVisible(true);
+        this.dispose();
+                
     }//GEN-LAST:event_iniciarPartActionPerformed
-
-    private void aniadirJug1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aniadirJug1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aniadirJug1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void eliminarJugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarJugActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_eliminarJugActionPerformed
+
+    private void aniadirJugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aniadirJugActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aniadirJugActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,24 +398,32 @@ public class PrePartida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aniadirJug1;
+    private javax.swing.JButton aniadirJug;
     private javax.swing.JButton botonSalir;
-    private javax.swing.JLabel canttexto;
     private javax.swing.JLabel canttexto1;
     private javax.swing.JLabel canttexto2;
+    private javax.swing.JLabel canttexto3;
+    private javax.swing.JLabel cattexto3;
+    private javax.swing.JLabel cattexto4;
+    private javax.swing.JLabel cattexto5;
+    private javax.swing.JLabel cattexto6;
     private javax.swing.JLabel configMenu;
     private javax.swing.JLabel configMenu1;
-    private javax.swing.JLabel exitBo;
+    private javax.swing.JButton eliminarJug;
+    private javax.swing.JLabel eliminarJugador;
+    private javax.swing.JLabel exitBo1;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton iniciarPart;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel jugar;
     private javax.swing.JLabel jugar1;
-    private javax.swing.JLabel jugar2;
     private javax.swing.JLabel jugar3;
+    private javax.swing.JLabel jugar4;
     private javax.swing.JLabel jugarText;
     private javax.swing.JLabel jugarbase;
     private javax.swing.JLabel jugarsombra;
@@ -348,5 +436,7 @@ public class PrePartida extends javax.swing.JFrame {
     private javax.swing.JLabel menuTextShadow1;
     private javax.swing.JLabel ponerUrs;
     private javax.swing.JLabel ponerUrs1;
+    private javax.swing.JLabel ponerUrs2;
+    private javax.swing.JLabel ponerUrs3;
     // End of variables declaration//GEN-END:variables
 }

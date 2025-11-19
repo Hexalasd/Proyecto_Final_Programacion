@@ -87,6 +87,8 @@ private void cargarFuentePixel() {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Opciones = new javax.swing.JButton();
+        opciones = new javax.swing.JLabel();
         botonJugar = new javax.swing.JButton();
         botonRank = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
@@ -118,6 +120,19 @@ private void cargarFuentePixel() {
 
         jPanel1.setBackground(new java.awt.Color(97, 17, 178));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Opciones.setBorderPainted(false);
+        Opciones.setContentAreaFilled(false);
+        Opciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpcionesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Opciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, 110));
+
+        opciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/rankBtn.png"))); // NOI18N
+        opciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(opciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 130, 110));
 
         botonJugar.setBorderPainted(false);
         botonJugar.setContentAreaFilled(false);
@@ -242,7 +257,7 @@ private void cargarFuentePixel() {
         companyText.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
         companyText.setForeground(new java.awt.Color(115, 84, 149));
         companyText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        companyText.setText("2025 HexSonic@gmail.com all rights reserved ");
+        companyText.setText("2025 HexCatDog@gmail.com all rights NOT reserved ");
         jPanel1.add(companyText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1040, 380, 40));
 
         companyText2.setFont(new java.awt.Font("Pixeloid Sans", 1, 18)); // NOI18N
@@ -254,7 +269,7 @@ private void cargarFuentePixel() {
         version.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
         version.setForeground(new java.awt.Color(115, 84, 149));
         version.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        version.setText("Made and distributed by: HexSonic.inc ");
+        version.setText("Made and distributed by: HexCatDog.inc ");
         jPanel1.add(version, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1020, 310, 40));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/kn3ai07br4d11.png"))); // NOI18N
@@ -290,6 +305,12 @@ private void cargarFuentePixel() {
        this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    private void OpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcionesActionPerformed
+        Configuracion entrada = new Configuracion();
+        entrada.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_OpcionesActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -317,6 +338,7 @@ private void cargarFuentePixel() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Opciones;
     private javax.swing.JLabel PlaceHolderMenu;
     private javax.swing.JButton botonJugar;
     private javax.swing.JButton botonRank;
@@ -341,6 +363,7 @@ private void cargarFuentePixel() {
     private javax.swing.JLabel menuText;
     private javax.swing.JLabel menuTextBase;
     private javax.swing.JLabel menuTextShadow;
+    private javax.swing.JLabel opciones;
     private javax.swing.JLabel rank;
     private javax.swing.JLabel rankBo;
     private javax.swing.JLabel version;
