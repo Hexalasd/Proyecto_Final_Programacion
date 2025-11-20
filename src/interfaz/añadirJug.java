@@ -40,8 +40,13 @@ public class añadirJug extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         Crear = new javax.swing.JButton();
+        emojiUsr = new javax.swing.JLabel();
+        emojiBot = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         cattexto6 = new javax.swing.JLabel();
         cattexto10 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -64,7 +69,28 @@ public class añadirJug extends javax.swing.JFrame {
                 CrearActionPerformed(evt);
             }
         });
-        jPanel1.add(Crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 200, 50));
+        jPanel1.add(Crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 200, 50));
+
+        emojiUsr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/robot.png"))); // NOI18N
+        jPanel1.add(emojiUsr, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 50, 50));
+
+        emojiBot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/person.png"))); // NOI18N
+        jPanel1.add(emojiBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 50, 50));
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        jRadioButton1.setText("Jugador ");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 120, 40));
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        jRadioButton2.setText("Jug Sistema");
+        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 150, 40));
 
         cattexto6.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
         cattexto6.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,6 +164,10 @@ public class añadirJug extends javax.swing.JFrame {
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
     /**
@@ -4272,11 +4302,16 @@ public class añadirJug extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Crear;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel cattexto10;
     private javax.swing.JLabel cattexto6;
     private javax.swing.JLabel configMenu;
+    private javax.swing.JLabel emojiBot;
+    private javax.swing.JLabel emojiUsr;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel menuText1;
