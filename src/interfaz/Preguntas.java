@@ -4,16 +4,16 @@
  */
 package interfaz;
 
-import interfaz.extra.modPre;
-import interfaz.extra.añadirPre;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.Collections;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JViewport;
 import logica.Juego;
 import logica.Jugador;
@@ -36,11 +36,13 @@ public class Preguntas extends javax.swing.JFrame {
     /**
      * Creates new form PrePartida
      */
-    public Preguntas() {
+    public Preguntas() throws ClassNotFoundException, Excepciones {
         initComponents();
+        juego = Juego.getInstance();
         modelo = new DefaultListModel();
         jList1.setModel(modelo);
-        juego.getListaPreguntas().sort();
+        
+        Collections.sort(juego.getPreguntas());
         for (Pregunta p : juego.getPreguntas()){
             modelo.addElement(p.getPregunta());
         }
@@ -276,14 +278,20 @@ public class Preguntas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        Menu entrada = new Menu();
+        Configuracion entrada = new Configuracion();
         entrada.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void añadirPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirPreActionPerformed
-        añadirPre entrada = new añadirPre();
-        entrada.setVisible(true);
+        try {
+            añadirPre entrada = new añadirPre();
+            entrada.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Preguntas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Preguntas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_añadirPreActionPerformed
 
     private void modPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modPreActionPerformed
@@ -292,7 +300,20 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_modPreActionPerformed
 
     private void borrarPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarPreActionPerformed
-        // TODO add your handling code here:
+        int seleccionado = jList1.getSelectedIndex();
+        if(seleccionado == -1){
+            JOptionPane.showMessageDialog(this, "ERROR: procure seleccionar un elemento");
+        }else{
+            Pregunta pregunta = juego.getPreguntas().get(seleccionado);
+            String opcion = JOptionPane.showInputDialog(this, "Seguro que quiere eliminar la pregunta "+pregunta.getPregunta()+"? (si/no)");
+            if (opcion.equals("si")){
+                modelo.remove(seleccionado);
+                juego.getJugadores().remove(jList1.getSelectedIndex());
+            }else{
+                JOptionPane.showMessageDialog(this, "Operacion cancelada");
+
+            }
+        }
     }//GEN-LAST:event_borrarPreActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     

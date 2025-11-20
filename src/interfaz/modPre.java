@@ -4,7 +4,6 @@
  */
 package interfaz;
 
-import interfaz.extra.*;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
@@ -13,6 +12,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import logica.Categoria;
+import persistencia.Excepciones;
 
 
 
@@ -29,6 +33,9 @@ public class modPre extends javax.swing.JFrame {
      */
     public modPre() {
         initComponents();
+        for (int i=0; i < juego.getCategorias().size(); i++){
+            jComboBox1.addItem(juego.getCategorias().get(i).getNombre());
+        }
     }
     
     /**
