@@ -293,8 +293,14 @@ public class Categorias extends javax.swing.JFrame {
     }//GEN-LAST:event_añadirCatActionPerformed
 
     private void modCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCatActionPerformed
-        modCat modCat = new modCat();
-        modCat.setVisible(true);
+        try {
+            modCat modCat = new modCat();
+            modCat.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_modCatActionPerformed
 
     private void borrarCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarCatActionPerformed

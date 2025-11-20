@@ -242,9 +242,15 @@ public class Configuracion extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void editarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoriasActionPerformed
-        Categorias entrada = new Categorias();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Categorias entrada = new Categorias();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_editarCategoriasActionPerformed
 
     private void editarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadoresActionPerformed

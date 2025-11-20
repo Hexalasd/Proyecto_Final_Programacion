@@ -11,9 +11,15 @@ import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import logica.Categoria;
+import persistencia.Excepciones;
 
 
 
@@ -24,12 +30,20 @@ import javax.swing.JViewport;
 public class Preguntas extends javax.swing.JFrame {
 
     private JLabel blackScreen;
+    private DefaultListModel modelo;
+    private Juego juego;
     
     /**
      * Creates new form PrePartida
      */
     public Preguntas() {
         initComponents();
+        modelo = new DefaultListModel();
+        jList1.setModel(modelo);
+        juego.getListaPreguntas().sort();
+        for (Pregunta p : juego.getPreguntas()){
+            modelo.addElement(p.getPregunta());
+        }
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
 
