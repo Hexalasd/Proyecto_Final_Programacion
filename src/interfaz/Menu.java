@@ -10,12 +10,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import logica.Categoria;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import persistencia.Excepciones;
+import persistencia.Respaldo;
+import persistencia.Serializador;
 
 
 public class Menu extends javax.swing.JFrame {
 
 private Font pixeloidFont;
 private JLabel blackScreen;
+private Juego juego;
+private String juegoPasswd = "admin";
 
 private void cargarFuentePixel() {
     try {
@@ -29,8 +39,9 @@ private void cargarFuentePixel() {
         pixeloidFont = new Font("SansSerif", Font.PLAIN, 24);
     }
 }
-    public Menu() {
+    public Menu() throws ClassNotFoundException, Excepciones {
         initComponents();
+        juego = Juego.getInstance();
         cargarFuentePixel();   
         botonRank.setCursor(new Cursor(Cursor.HAND_CURSOR));
         botonJugar.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -302,13 +313,24 @@ private void cargarFuentePixel() {
     }//GEN-LAST:event_botonRankActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-       this.dispose();
+       try {
+        juego.guardarColeccion();
+    } catch (Excepciones ex) {
+        System.getLogger(Menu.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+    }
+        this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void OpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcionesActionPerformed
-        Configuracion entrada = new Configuracion();
-        entrada.setVisible(true);
-        this.dispose();
+        String juegoPasswdInput = JOptionPane.showInputDialog(this, "Ingrese la contraseña de administrador:");
+        if (juegoPasswdInput.equals(juegoPasswd)){
+            JOptionPane.showMessageDialog(this, "Contraseña correcta, entrando al menu de configuracion...");
+            Configuracion entrada = new Configuracion();
+            entrada.setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
+        }
     }//GEN-LAST:event_OpcionesActionPerformed
 
     public static void main(String args[]) {
@@ -332,7 +354,13 @@ private void cargarFuentePixel() {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                try {
+                    new Menu().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(Menu.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(Menu.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }

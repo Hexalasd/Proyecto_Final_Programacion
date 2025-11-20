@@ -2,37 +2,61 @@ package logica;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-//con singleton porque el sisema del juego es unico
+import java.util.Collections;
+import java.util.Comparator;
+import persistencia.Excepciones;
+import persistencia.Respaldo;
+
+//con singleton porque el sistema del juego es unico
 public class Juego implements Serializable{
         private ArrayList <Jugador> jugadores;
         private ArrayList <Pregunta> preguntas;
         private ArrayList <Categoria> categorias;
         private static Juego JUEGO;
 
-       /*
-        TIENE UN ERROR PORQUE EL CONSTRUCTOR ESTA COMO COMENTARIO, NO TOQUES!!!!!!!!!!!!!!!!!!!!
-  parece qe se implementa distinto esto con la persistencia
-   //constructor privado
-    private Juego(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas, ArrayList<Categoria> categorias) {
-        this.jugadores = jugadores;
-        this.preguntas = preguntas;
-        this.categorias = categorias;
+     private Juego() throws ClassNotFoundException, Excepciones {
+        Respaldo archivos = new Respaldo();
+
+        if (archivos.existeArchivo("Juego")) {
+            Juego juegoRecuperado = (Juego) archivos.recuperar("Juego");
+            this.jugadores = juegoRecuperado.jugadores;
+            this.preguntas = juegoRecuperado.preguntas;
+            this.categorias = juegoRecuperado.categorias;
+        } else {
+            jugadores = new ArrayList<Jugador>();
+            preguntas = new ArrayList<Pregunta>();
+            categorias = new ArrayList<Categoria>();
+        }
     }
-    */
-    //singleton
-    public static Juego getSingletonInstance(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas, ArrayList<Categoria> categorias){
-        if (JUEGO == null){
-            Juego JUEGO = new Juego(jugadores, preguntas, categorias);
+
+    public static Juego getInstance() throws ClassNotFoundException, Excepciones {
+        if (JUEGO == null) {
+            JUEGO = new Juego();
         }
         return JUEGO;
     }
-
-
-        
-        
-        
-        
-        
+    
+    public void guardarColeccion() throws Excepciones {
+        Respaldo archivos = new Respaldo();
+        archivos.respaldar("Juego", this);
+    }
+    
+    
+    
+     public ArrayList<Jugador> getListaJugadores() {
+        Collections.sort(jugadores);
+        return jugadores;
+    }
+     public ArrayList<Pregunta> getListaPreguntas() {
+        Collections.sort(preguntas);
+        return preguntas;
+    }
+     public ArrayList<Categoria> getListaCategorias() {
+        Collections.sort(categorias);
+        return categorias;
+    }
+     
+ 
         
     //agregar o borrar (modificar esta en cada clase)
     
@@ -97,5 +121,20 @@ public class Juego implements Serializable{
     public ArrayList<Categoria> getCategorias() {
         return categorias;
     } 
+    
+    
+    public void addPregunta(Pregunta p){
+        preguntas.add(p);
+    }
+    
+    public void addCategoria(Categoria p){
+        categorias.add(p);
+    }
+    
+    public void addJugador(Jugador p){
+        jugadores.add(p);
+    }
+    
+    
       
 }

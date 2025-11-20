@@ -4,14 +4,19 @@
  */
 package interfaz;
 
+import interfaz.Jugadores;
+import interfaz.Menu;
+import interfaz.Preguntas;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import persistencia.Excepciones;
 
 
 
@@ -53,7 +58,8 @@ public class Configuracion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         editarJugadores = new javax.swing.JButton();
-        editarJugadores1 = new javax.swing.JButton();
+        editarCategorias = new javax.swing.JButton();
+        editarPreguntas = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
         jugarText = new javax.swing.JLabel();
         jugarbase = new javax.swing.JLabel();
@@ -63,6 +69,10 @@ public class Configuracion extends javax.swing.JFrame {
         jugarbase1 = new javax.swing.JLabel();
         jugarsombra1 = new javax.swing.JLabel();
         jugar1 = new javax.swing.JLabel();
+        jugarText2 = new javax.swing.JLabel();
+        jugarbase2 = new javax.swing.JLabel();
+        jugarsombra2 = new javax.swing.JLabel();
+        jugar2 = new javax.swing.JLabel();
         exitBo1 = new javax.swing.JLabel();
         menuText = new javax.swing.JLabel();
         menuTextBase = new javax.swing.JLabel();
@@ -82,16 +92,25 @@ public class Configuracion extends javax.swing.JFrame {
                 editarJugadoresActionPerformed(evt);
             }
         });
-        jPanel1.add(editarJugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 320, 120));
+        jPanel1.add(editarJugadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, 320, 120));
 
-        editarJugadores1.setBorderPainted(false);
-        editarJugadores1.setContentAreaFilled(false);
-        editarJugadores1.addActionListener(new java.awt.event.ActionListener() {
+        editarCategorias.setBorderPainted(false);
+        editarCategorias.setContentAreaFilled(false);
+        editarCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarJugadores1ActionPerformed(evt);
+                editarCategoriasActionPerformed(evt);
             }
         });
-        jPanel1.add(editarJugadores1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 290, 320, 120));
+        jPanel1.add(editarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 470, 320, 120));
+
+        editarPreguntas.setBorderPainted(false);
+        editarPreguntas.setContentAreaFilled(false);
+        editarPreguntas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarPreguntasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(editarPreguntas, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 630, 320, 120));
 
         botonSalir.setBorderPainted(false);
         botonSalir.setContentAreaFilled(false);
@@ -127,22 +146,43 @@ public class Configuracion extends javax.swing.JFrame {
         jugarText1.setForeground(new java.awt.Color(255, 255, 255));
         jugarText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jugarText1.setText("categorias");
-        jPanel1.add(jugarText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 310, 80));
+        jPanel1.add(jugarText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 480, 310, 80));
 
         jugarbase1.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
         jugarbase1.setForeground(new java.awt.Color(0, 204, 204));
         jugarbase1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jugarbase1.setText("categorias");
-        jPanel1.add(jugarbase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 500, 310, 100));
+        jPanel1.add(jugarbase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 470, 310, 100));
 
         jugarsombra1.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
         jugarsombra1.setForeground(new java.awt.Color(30, 126, 126));
         jugarsombra1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jugarsombra1.setText("categorias");
-        jPanel1.add(jugarsombra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 510, 360, 90));
+        jPanel1.add(jugarsombra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 480, 360, 90));
 
         jugar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
-        jPanel1.add(jugar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, 730, 170));
+        jPanel1.add(jugar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 730, 170));
+
+        jugarText2.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
+        jugarText2.setForeground(new java.awt.Color(255, 255, 255));
+        jugarText2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jugarText2.setText("preguntas");
+        jPanel1.add(jugarText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 640, 310, 80));
+
+        jugarbase2.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
+        jugarbase2.setForeground(new java.awt.Color(0, 204, 204));
+        jugarbase2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jugarbase2.setText("preguntas");
+        jPanel1.add(jugarbase2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 630, 310, 100));
+
+        jugarsombra2.setFont(new java.awt.Font("Pixeloid Sans", 0, 46)); // NOI18N
+        jugarsombra2.setForeground(new java.awt.Color(30, 126, 126));
+        jugarsombra2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jugarsombra2.setText("preguntas");
+        jPanel1.add(jugarsombra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 640, 360, 90));
+
+        jugar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
+        jPanel1.add(jugar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 580, 730, 170));
 
         exitBo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/exitBtnBigger.png"))); // NOI18N
         jPanel1.add(exitBo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, 110));
@@ -190,18 +230,46 @@ public class Configuracion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        Menu entrada = new Menu();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Menu entrada = new Menu();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void editarJugadores1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadores1ActionPerformed
-    
-    }//GEN-LAST:event_editarJugadores1ActionPerformed
+    private void editarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoriasActionPerformed
+        try {
+            Categorias entrada = new Categorias();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_editarCategoriasActionPerformed
 
     private void editarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadoresActionPerformed
-
+        try {
+            Jugadores entrada = new Jugadores();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_editarJugadoresActionPerformed
+
+    private void editarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPreguntasActionPerformed
+        Preguntas entrada = new Preguntas();
+        entrada.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_editarPreguntasActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
     /**
@@ -261,6 +329,38 @@ public class Configuracion extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -272,20 +372,25 @@ public class Configuracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
+    private javax.swing.JButton editarCategorias;
     private javax.swing.JButton editarJugadores;
-    private javax.swing.JButton editarJugadores1;
+    private javax.swing.JButton editarPreguntas;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel exitBo1;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jugar;
     private javax.swing.JLabel jugar1;
+    private javax.swing.JLabel jugar2;
     private javax.swing.JLabel jugarText;
     private javax.swing.JLabel jugarText1;
+    private javax.swing.JLabel jugarText2;
     private javax.swing.JLabel jugarbase;
     private javax.swing.JLabel jugarbase1;
+    private javax.swing.JLabel jugarbase2;
     private javax.swing.JLabel jugarsombra;
     private javax.swing.JLabel jugarsombra1;
+    private javax.swing.JLabel jugarsombra2;
     private javax.swing.JLabel menuText;
     private javax.swing.JLabel menuTextBase;
     private javax.swing.JLabel menuTextShadow;

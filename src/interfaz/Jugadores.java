@@ -9,9 +9,16 @@ import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JViewport;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import logica.Categoria;
+import persistencia.Excepciones;
 
 
 
@@ -21,13 +28,22 @@ import javax.swing.JViewport;
  */
 public class Jugadores extends javax.swing.JFrame {
 
-    private JLabel blackScreen;
-    
+    private DefaultListModel modelo;
+    private Juego juego;
+
     /**
      * Creates new form PrePartida
      */
-    public Jugadores() {
+    public Jugadores() throws ClassNotFoundException, Excepciones {
         initComponents();
+        
+        juego = Juego.getInstance();
+        modelo = new DefaultListModel();
+        jList1.setModel(modelo);
+        for (Jugador j : juego.getJugadores()){
+            j.setCategoria("General");
+            modelo.addElement(j.getNombre());
+        }
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
 
@@ -254,21 +270,41 @@ public class Jugadores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        Menu entrada = new Menu();
+        Configuracion entrada = new Configuracion();
         entrada.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void añadirJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirJugadoresActionPerformed
-
+        
     }//GEN-LAST:event_añadirJugadoresActionPerformed
 
     private void editarJugadores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadores2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            modJug ventana = new modJug();
+            ventana.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_editarJugadores2ActionPerformed
 
     private void borraJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borraJugadoresActionPerformed
-        // TODO add your handling code here:
+        int seleccionado = jList1.getSelectedIndex();
+        if(seleccionado == -1){
+            JOptionPane.showMessageDialog(this, "ERROR: procure seleccionar un elemento");
+        }else{
+            Jugador jugador = juego.getJugadores().get(seleccionado);
+            String opcion = JOptionPane.showInputDialog(this, "Seguro que quiere eliminar al jugador "+jugador.getNombre()+"? (si/no)");
+            if (opcion.equals("si")){
+                modelo.remove(seleccionado);
+                juego.getJugadores().remove(jList1.getSelectedIndex());
+            }else{
+                JOptionPane.showMessageDialog(this, "Operacion cancelada");
+
+            }
+        }
     }//GEN-LAST:event_borraJugadoresActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
@@ -429,7 +465,13 @@ public class Jugadores extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Jugadores().setVisible(true);
+                try {
+                    new Jugadores().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
