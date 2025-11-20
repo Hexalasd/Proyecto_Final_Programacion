@@ -297,10 +297,19 @@ public class Jugadores extends javax.swing.JFrame {
     }//GEN-LAST:event_editarJugadores2ActionPerformed
 
     private void borraJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borraJugadoresActionPerformed
-        if(jList1.getSelectedIndex() == -1){
+        int seleccionado = jList1.getSelectedIndex();
+        if(seleccionado == -1){
             JOptionPane.showMessageDialog(this, "ERROR: procure seleccionar un elemento");
         }else{
-            Jugador jugador = juego.getJugadores().get(jList1.getSelectedIndex());
+            Jugador jugador = juego.getJugadores().get(seleccionado);
+            String opcion = JOptionPane.showInputDialog(this, "Seguro que quiere eliminar al jugador "+jugador.getNombre()+"? (si/no)");
+            if (opcion.equals("si")){
+                modelo.remove(seleccionado);
+                juego.getJugadores().remove(jList1.getSelectedIndex());
+            }else{
+                JOptionPane.showMessageDialog(this, "Operacion cancelada");
+
+            }
         }
     }//GEN-LAST:event_borraJugadoresActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
@@ -462,7 +471,13 @@ public class Jugadores extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Jugadores().setVisible(true);
+                try {
+                    new Jugadores().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }

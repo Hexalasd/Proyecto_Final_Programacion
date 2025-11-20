@@ -48,6 +48,7 @@ public class añadirJug extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         menuText1 = new javax.swing.JLabel();
         configMenu = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +107,9 @@ public class añadirJug extends javax.swing.JFrame {
         configMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         configMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/MenuSmall.png"))); // NOI18N
         jPanel1.add(configMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-400, -190, 1240, 570));
+
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -4271,6 +4275,7 @@ public class añadirJug extends javax.swing.JFrame {
     private javax.swing.JLabel cattexto10;
     private javax.swing.JLabel cattexto6;
     private javax.swing.JLabel configMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;
