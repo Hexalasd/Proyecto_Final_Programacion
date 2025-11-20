@@ -17,7 +17,7 @@ public class Jugador  implements Serializable, Comparable<Jugador>{
 
     public Jugador(String nombre) {
         this.nombre = nombre;
-        this.tipo = "default";
+        this.tipo = "sistema";
         this.passwd = "";
         //hash map es la implementacion de map
         puntajes = new HashMap<>();

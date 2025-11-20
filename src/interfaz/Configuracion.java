@@ -4,7 +4,6 @@
  */
 package interfaz;
 
-import interfaz.extra.*;
 import interfaz.Jugadores;
 import interfaz.Menu;
 import interfaz.Preguntas;
@@ -13,9 +12,11 @@ import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import persistencia.Excepciones;
 
 
 
@@ -229,9 +230,15 @@ public class Configuracion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        Menu entrada = new Menu();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Menu entrada = new Menu();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void editarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoriasActionPerformed
@@ -241,9 +248,15 @@ public class Configuracion extends javax.swing.JFrame {
     }//GEN-LAST:event_editarCategoriasActionPerformed
 
     private void editarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadoresActionPerformed
-        Jugadores entrada = new Jugadores();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Jugadores entrada = new Jugadores();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_editarJugadoresActionPerformed
 
     private void editarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPreguntasActionPerformed
