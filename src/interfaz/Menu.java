@@ -1,5 +1,6 @@
 package interfaz;
 
+import interfaz.extra.Configuracion;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
