@@ -260,7 +260,7 @@ public class Categorias extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void añadirCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirCatActionPerformed
-
+        
     }//GEN-LAST:event_añadirCatActionPerformed
 
     private void modCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCatActionPerformed
