@@ -266,9 +266,15 @@ public class Configuracion extends javax.swing.JFrame {
     }//GEN-LAST:event_editarJugadoresActionPerformed
 
     private void editarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarPreguntasActionPerformed
-        Preguntas entrada = new Preguntas();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Preguntas entrada = new Preguntas();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Configuracion.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_editarPreguntasActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     

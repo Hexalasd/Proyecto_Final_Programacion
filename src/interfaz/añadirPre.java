@@ -220,38 +220,41 @@ public class añadirPre extends javax.swing.JFrame {
 
     private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
         String sCategoria = (String) jComboBox1.getSelectedItem();           
-            String pregunta = texto.getText();
-            String pCorrecta = correcta.getText();
-            String pInc1 = inc1.getText();
-            String pInc2 = inc2.getText();
-            String pInc3 = inc3.getText();
+        String pregunta = texto.getText();
+        String pCorrecta = correcta.getText();
+        String pInc1 = inc1.getText();
+        String pInc2 = inc2.getText();
+        String pInc3 = inc3.getText();
 
-            if (pregunta.trim().isEmpty()
-                && pCorrecta.trim().isEmpty()
-                && pInc1.trim().isEmpty()
-                && pInc2.trim().isEmpty()
-                && pInc3.trim().isEmpty()){
+        if (pregunta.trim().isEmpty()
+            && pCorrecta.trim().isEmpty()
+            && pInc1.trim().isEmpty()
+            && pInc2.trim().isEmpty()
+            && pInc3.trim().isEmpty()){
 
-                JOptionPane.showMessageDialog(this, "ERROR: procure completar todos los campos");
-            }else{
-                int i = 0;
-                boolean encontrado = false;
-                do{
-                    Categoria c = juego.getCategorias().get(i);
-                    if (c.getNombre().equals(sCategoria)){
-                        encontrado = true;
-                    }else{
-                        i++;
-                    }
-                }while( (i < juego.getCategorias().size()) && (encontrado = false));
-
-                if(!encontrado){
-                    JOptionPane.showMessageDialog(this, "ERROR: categoria no encontrada");
+            JOptionPane.showMessageDialog(this, "ERROR: procure completar todos los campos");
+        }else{
+            int i = 0;
+            boolean encontrado = false;
+            do{
+                Categoria c = juego.getCategorias().get(i);
+                if (c.getNombre().equals(sCategoria)){
+                    encontrado = true;
                 }else{
-                    Categoria categoria = juego.getCategorias().get(i);
-                    ArrayList<String> respuestas = new ArrayList<>();
-                    juego.addPregunta(pregunta, pInc1, pInc2, pInc3, pCorrecta, categoria);
+                    i++;
                 }
+            }while( (i < juego.getCategorias().size()) && (encontrado = false));
+
+            if(!encontrado){
+                JOptionPane.showMessageDialog(this, "ERROR: categoria no encontrada");
+                this.dispose();
+            }else{
+                Categoria categoria = juego.getCategorias().get(i);
+                ArrayList<String> respuestas = new ArrayList<>();
+                juego.addPregunta(pregunta, pInc1, pInc2, pInc3, pCorrecta, categoria);
+                JOptionPane.showMessageDialog(this, "Pregunta anadida correctamente");
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_CrearActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION

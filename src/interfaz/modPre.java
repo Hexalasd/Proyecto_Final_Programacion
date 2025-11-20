@@ -8,9 +8,11 @@ import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JViewport;
 import logica.Juego;
 import logica.Jugador;
@@ -27,11 +29,13 @@ import persistencia.Excepciones;
 public class modPre extends javax.swing.JFrame {
 
     private JLabel blackScreen;
+    private Juego juego;
     
     /**
      * Creates new form PrePartida
      */
-    public modPre() {
+    public modPre() throws ClassNotFoundException, Excepciones {
+        juego = Juego.getInstance();
         initComponents();
         for (int i=0; i < juego.getCategorias().size(); i++){
             jComboBox1.addItem(juego.getCategorias().get(i).getNombre());
@@ -48,7 +52,7 @@ public class modPre extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        inc3 = new javax.swing.JTextField();
         mod = new javax.swing.JButton();
         cattexto3 = new javax.swing.JLabel();
         cattexto5 = new javax.swing.JLabel();
@@ -59,10 +63,10 @@ public class modPre extends javax.swing.JFrame {
         cattexto9 = new javax.swing.JLabel();
         listaJug = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        texto = new javax.swing.JTextField();
+        inc1 = new javax.swing.JTextField();
+        inc2 = new javax.swing.JTextField();
+        correcta = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         menuText1 = new javax.swing.JLabel();
         configMenu = new javax.swing.JLabel();
@@ -72,15 +76,15 @@ public class modPre extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField1.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        inc3.setBackground(new java.awt.Color(7, 88, 119));
+        inc3.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        inc3.setBorder(null);
+        inc3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                inc3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 120, 30));
+        jPanel1.add(inc3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 120, 30));
 
         mod.setBackground(new java.awt.Color(7, 88, 119));
         mod.setText("mod");
@@ -145,49 +149,54 @@ public class modPre extends javax.swing.JFrame {
         jList1.setAutoscrolls(false);
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jList1.setVisibleRowCount(4);
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         listaJug.setViewportView(jList1);
 
         jPanel1.add(listaJug, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 410, 80));
 
-        jTextField2.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField2.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField2.setBorder(null);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        texto.setBackground(new java.awt.Color(7, 88, 119));
+        texto.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        texto.setBorder(null);
+        texto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                textoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 320, 30));
+        jPanel1.add(texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 320, 30));
 
-        jTextField3.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField3.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField3.setBorder(null);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        inc1.setBackground(new java.awt.Color(7, 88, 119));
+        inc1.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        inc1.setBorder(null);
+        inc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                inc1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 120, 30));
+        jPanel1.add(inc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 120, 30));
 
-        jTextField4.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField4.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField4.setBorder(null);
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        inc2.setBackground(new java.awt.Color(7, 88, 119));
+        inc2.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        inc2.setBorder(null);
+        inc2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                inc2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 120, 30));
+        jPanel1.add(inc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 120, 30));
 
-        jTextField5.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField5.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField5.setBorder(null);
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        correcta.setBackground(new java.awt.Color(7, 88, 119));
+        correcta.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        correcta.setBorder(null);
+        correcta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                correctaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 120, 30));
+        jPanel1.add(correcta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 120, 30));
 
         jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
@@ -220,29 +229,83 @@ public class modPre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void inc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inc3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_inc3ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_textoActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void inc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inc1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_inc1ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void inc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inc2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_inc2ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void correctaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correctaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_correctaActionPerformed
 
     private void modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modActionPerformed
-       this.dispose();
+       int indice = jList1.getSelectedIndex();
+       Pregunta objPregunta = juego.getPreguntas().get(indice);
+       String pregunta = texto.getText();
+       String pCorrecta = correcta.getText();
+       String pInc1 = inc1.getText();
+       String pInc2 = inc2.getText();
+       String pInc3 = inc3.getText();
+       String sCategoria = (String) jComboBox1.getSelectedItem();
+       
+       if (pregunta.trim().isEmpty()
+            && pCorrecta.trim().isEmpty()
+            && pInc1.trim().isEmpty()
+            && pInc2.trim().isEmpty()
+            && pInc3.trim().isEmpty()){
+
+            JOptionPane.showMessageDialog(this, "ERROR: no puede dejar campos vacios");
+        }else{
+            int i = 0;
+            boolean encontrado = false;
+            do{
+                Categoria c = juego.getCategorias().get(i);
+                if (c.getNombre().equals(sCategoria)){
+                    encontrado = true;
+                }else{
+                    i++;
+                }
+            }while( (i < juego.getCategorias().size()) && (encontrado = false));
+
+            if(!encontrado){
+                JOptionPane.showMessageDialog(this, "ERROR: categoria no encontrada");
+                this.dispose();
+            }else{
+                Categoria categoria = juego.getCategorias().get(i);
+                objPregunta.setCategoria(categoria);
+                objPregunta.setPregunta(pregunta);
+                objPregunta.setRespuestaCorrecta(pCorrecta);
+                
+                
+                ArrayList<String> rInc = new ArrayList<>();
+                rInc.add(pInc3);
+                rInc.add(pInc2);
+                rInc.add(pInc1);
+                objPregunta.setPosiblesRespuestas(rInc);
+            }   
+       }
     }//GEN-LAST:event_modActionPerformed
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        int posicion = jList1.getSelectedIndex();
+        Pregunta pregunta = juego.getPreguntas().get(posicion);
+        texto.setText(pregunta.getPregunta());
+        correcta.setText(pregunta.getRespuestaCorrecta());
+        inc1.setText(pregunta.getPosiblesRespuestas().get(1));
+        inc2.setText(pregunta.getPosiblesRespuestas().get(2));
+        inc3.setText(pregunta.getPosiblesRespuestas().get(3));
+    }//GEN-LAST:event_jList1ValueChanged
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
     /**
@@ -4370,7 +4433,13 @@ public class modPre extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new modPre().setVisible(true);
+                try {
+                    new modPre().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(modPre.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(modPre.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
@@ -4384,16 +4453,16 @@ public class modPre extends javax.swing.JFrame {
     private javax.swing.JLabel cattexto8;
     private javax.swing.JLabel cattexto9;
     private javax.swing.JLabel configMenu;
+    private javax.swing.JTextField correcta;
+    private javax.swing.JTextField inc1;
+    private javax.swing.JTextField inc2;
+    private javax.swing.JTextField inc3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JScrollPane listaJug;
     private javax.swing.JLabel menuText1;
     private javax.swing.JButton mod;
+    private javax.swing.JTextField texto;
     // End of variables declaration//GEN-END:variables
 }

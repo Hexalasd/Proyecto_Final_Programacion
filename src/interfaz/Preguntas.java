@@ -295,8 +295,14 @@ public class Preguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_añadirPreActionPerformed
 
     private void modPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modPreActionPerformed
-      modPre entrada = new modPre();
-      entrada.setVisible(true);
+        try {
+            modPre entrada = new modPre();
+            entrada.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Preguntas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Preguntas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_modPreActionPerformed
 
     private void borrarPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarPreActionPerformed
@@ -311,7 +317,6 @@ public class Preguntas extends javax.swing.JFrame {
                 juego.getJugadores().remove(jList1.getSelectedIndex());
             }else{
                 JOptionPane.showMessageDialog(this, "Operacion cancelada");
-
             }
         }
     }//GEN-LAST:event_borrarPreActionPerformed
@@ -858,7 +863,13 @@ public class Preguntas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Preguntas().setVisible(true);
+                try {
+                    new Preguntas().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(Preguntas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(Preguntas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
