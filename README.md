@@ -1,1 +1,4 @@
-#proyecto-trivia-programacion
+**TRIVIA GALAXY**
+
+Juego de trivia con:
+
