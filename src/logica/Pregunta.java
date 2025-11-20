@@ -3,7 +3,7 @@ package logica;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pregunta implements Serializable {
+public class Pregunta implements Serializable, Comparable<Pregunta> {
     private String pregunta;
     private ArrayList<String> posiblesRespuestas;
     private String respuestaCorrecta;
@@ -53,6 +53,18 @@ public class Pregunta implements Serializable {
         return "Pregunta{" + "pregunta=" + pregunta + ", posiblesRespuestas=" + posiblesRespuestas + ", respuestaCorrecta=" + respuestaCorrecta + ", categoria=" + categoria + '}';
     }
     
-    
+    public int compareTo(Pregunta p) {
+        //guardamos el resultado de la comparacoin cpor categoria ignorando mayusculas
+        int compCategoria = this.getCategoria().getNombre().compareToIgnoreCase(p.getCategoria().getNombre());
+
+        //si no son iguales se devuelve el resultado
+        if (compCategoria != 0) {
+            return compCategoria;
+        }else{
+            //si no, lo comparamos segun el texto de la pregunta (alfabeticamente) 
+            return this.getPregunta().compareToIgnoreCase(p.getPregunta());
+
+        }
+    }
     
 }
