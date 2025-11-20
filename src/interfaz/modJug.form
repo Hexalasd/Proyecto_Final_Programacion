@@ -90,11 +90,7 @@
                   <Font name="Pixeloid Sans" size="18" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Valentina"/>
-                    <StringItem index="1" value="Arturo"/>
-                    <StringItem index="2" value="gauanabana"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
                 <Property name="selectionMode" type="int" value="0"/>
                 <Property name="autoscrolls" type="boolean" value="false"/>

@@ -58,7 +58,6 @@ public class PrePartida extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         eliminarJugador = new javax.swing.JLabel();
         exitBo1 = new javax.swing.JLabel();
-        ponerUrs1 = new javax.swing.JLabel();
         jugarText = new javax.swing.JLabel();
         jugarbase = new javax.swing.JLabel();
         jugarsombra = new javax.swing.JLabel();
@@ -88,14 +87,12 @@ public class PrePartida extends javax.swing.JFrame {
         canttexto3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1930, 1030));
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 600, 140, 50));
 
         botonSalir.setBorderPainted(false);
@@ -154,11 +151,6 @@ public class PrePartida extends javax.swing.JFrame {
 
         jList1.setBackground(new java.awt.Color(7, 88, 119));
         jList1.setFont(new java.awt.Font("Pixeloid Sans", 1, 36)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setAutoscrolls(false);
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -172,12 +164,6 @@ public class PrePartida extends javax.swing.JFrame {
 
         exitBo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/exitBtnBigger.png"))); // NOI18N
         jPanel1.add(exitBo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, 110));
-
-        ponerUrs1.setFont(new java.awt.Font("Pixeloid Sans", 0, 36)); // NOI18N
-        ponerUrs1.setForeground(new java.awt.Color(255, 255, 255));
-        ponerUrs1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ponerUrs1.setText("user passw");
-        jPanel1.add(ponerUrs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 430, 130));
 
         jugarText.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         jugarText.setForeground(new java.awt.Color(255, 255, 255));
@@ -247,7 +233,6 @@ public class PrePartida extends javax.swing.JFrame {
 
         jComboBox2.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox2.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6" }));
         jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 600, 140, 50));
 
         menuText.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
@@ -277,8 +262,8 @@ public class PrePartida extends javax.swing.JFrame {
         ponerUrs3.setFont(new java.awt.Font("Pixeloid Sans", 0, 36)); // NOI18N
         ponerUrs3.setForeground(new java.awt.Color(255, 255, 255));
         ponerUrs3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ponerUrs3.setText("user passw");
-        jPanel1.add(ponerUrs3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 430, 130));
+        ponerUrs3.setText("user passwd");
+        jPanel1.add(ponerUrs3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 430, 130));
 
         menuText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
         menuText1.setForeground(new java.awt.Color(255, 255, 255));
@@ -435,7 +420,6 @@ public class PrePartida extends javax.swing.JFrame {
     private javax.swing.JLabel menuTextShadow;
     private javax.swing.JLabel menuTextShadow1;
     private javax.swing.JLabel ponerUrs;
-    private javax.swing.JLabel ponerUrs1;
     private javax.swing.JLabel ponerUrs2;
     private javax.swing.JLabel ponerUrs3;
     // End of variables declaration//GEN-END:variables

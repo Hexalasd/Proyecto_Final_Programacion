@@ -140,11 +140,6 @@ public class modPre extends javax.swing.JFrame {
 
         jList1.setBackground(new java.awt.Color(7, 88, 119));
         jList1.setFont(new java.awt.Font("Pixeloid Sans", 1, 18)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "pregunta 1", "pregunta 2", "pregunta 3", "pregunta 4" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setAutoscrolls(false);
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -200,7 +195,6 @@ public class modPre extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "historia" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 160, -1));
 
         menuText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N

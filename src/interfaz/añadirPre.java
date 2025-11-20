@@ -169,7 +169,6 @@ public class añadirPre extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "historia" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 160, -1));
 
         menuText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N

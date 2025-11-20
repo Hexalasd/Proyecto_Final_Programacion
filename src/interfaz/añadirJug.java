@@ -4,15 +4,20 @@
  */
 package interfaz;
 
-import interfaz.extra.*;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import logica.Categoria;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import persistencia.Excepciones;
 
 
 
@@ -23,12 +28,15 @@ import javax.swing.JViewport;
 public class añadirJug extends javax.swing.JFrame {
 
     private JLabel blackScreen;
+    private Juego juego;
+    
     
     /**
      * Creates new form PrePartida
      */
-    public añadirJug() {
+    public añadirJug() throws ClassNotFoundException, Excepciones {
         initComponents();
+        juego = Juego.getInstance();
     }
     
     /**
@@ -40,17 +48,17 @@ public class añadirJug extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        botones = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         Crear = new javax.swing.JButton();
         emojiUsr = new javax.swing.JLabel();
         emojiBot = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        btn1 = new javax.swing.JRadioButton();
+        btn2 = new javax.swing.JRadioButton();
         cattexto6 = new javax.swing.JLabel();
         cattexto10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        passwd = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
         menuText1 = new javax.swing.JLabel();
         configMenu = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -77,20 +85,26 @@ public class añadirJug extends javax.swing.JFrame {
         emojiBot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/person.png"))); // NOI18N
         jPanel1.add(emojiBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 50, 50));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
-        jRadioButton1.setText("Jugador ");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        botones.add(btn1);
+        btn1.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        btn1.setSelected(true);
+        btn1.setText("Jugador ");
+        btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                btn1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 120, 40));
+        jPanel1.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 120, 40));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
-        jRadioButton2.setText("Jug Sistema");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 150, 40));
+        botones.add(btn2);
+        btn2.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        btn2.setText("Jug Sistema");
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 150, 40));
 
         cattexto6.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
         cattexto6.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,25 +118,25 @@ public class añadirJug extends javax.swing.JFrame {
         cattexto10.setText("contraseña");
         jPanel1.add(cattexto10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 160, 30));
 
-        jTextField6.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField6.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField6.setBorder(null);
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        passwd.setBackground(new java.awt.Color(7, 88, 119));
+        passwd.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        passwd.setBorder(null);
+        passwd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                passwdActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 170, 30));
+        jPanel1.add(passwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 170, 30));
 
-        jTextField2.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField2.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField2.setBorder(null);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        user.setBackground(new java.awt.Color(7, 88, 119));
+        user.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        user.setBorder(null);
+        user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                userActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 170, 30));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 170, 30));
 
         menuText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
         menuText1.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,21 +167,41 @@ public class añadirJug extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_userActionPerformed
 
     private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
-       this.dispose();
+        String sUsuario = user.getText();
+        String sPasswd = passwd.getText();
+       
+        if(btn1.isSelected()){
+            if(sUsuario.trim().isEmpty() && sPasswd.trim().isEmpty()){
+                JOptionPane.showMessageDialog(this, "ERROR: procure rellenar todos los campos");
+            }else{
+                juego.addJugador(sUsuario, sPasswd);
+            }
+        }else{
+            if(sUsuario.trim().isEmpty()){
+                JOptionPane.showMessageDialog(this, "ERROR: procure rellenar todos los campos");
+            }else{
+                juego.addJugador(sUsuario);
+            }
+        }
+     
     }//GEN-LAST:event_CrearActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void passwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_passwdActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+        passwd.setEnabled(true);
+    }//GEN-LAST:event_btn1ActionPerformed
+
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+        passwd.setEnabled(false);
+    }//GEN-LAST:event_btn2ActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
     /**
@@ -4295,14 +4329,22 @@ public class añadirJug extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new añadirJug().setVisible(true);
+                try {
+                    new añadirJug().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(añadirJug.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(añadirJug.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Crear;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup botones;
+    private javax.swing.JRadioButton btn1;
+    private javax.swing.JRadioButton btn2;
     private javax.swing.JLabel cattexto10;
     private javax.swing.JLabel cattexto6;
     private javax.swing.JLabel configMenu;
@@ -4310,10 +4352,8 @@ public class añadirJug extends javax.swing.JFrame {
     private javax.swing.JLabel emojiUsr;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel menuText1;
+    private javax.swing.JTextField passwd;
+    private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }

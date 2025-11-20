@@ -71,11 +71,6 @@ public class Ranking extends javax.swing.JFrame {
 
         jList1.setBackground(new java.awt.Color(7, 88, 119));
         jList1.setFont(new java.awt.Font("Pixeloid Sans", 1, 60)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "1-VALENTINA 3049 points", "2-ARTURO 1049 points", "3-TUKI 10 points", "4-HEXAL 5 points", "5-VALECATDOG 1 points" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setAutoscrolls(false);
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -86,7 +81,6 @@ public class Ranking extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 1, 48)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Histroia", "informatica", "Item 4" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 110, 320, 100));
 
         menuText.setFont(new java.awt.Font("Pixeloid Sans", 0, 100)); // NOI18N

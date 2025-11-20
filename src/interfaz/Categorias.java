@@ -138,11 +138,6 @@ public class Categorias extends javax.swing.JFrame {
 
         jList1.setBackground(new java.awt.Color(7, 88, 119));
         jList1.setFont(new java.awt.Font("Pixeloid Sans", 1, 36)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Historia", "Matematica", "Informatica", "cultura" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setAutoscrolls(false);
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
