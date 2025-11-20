@@ -4,16 +4,22 @@
  */
 package interfaz;
 
-import interfaz.extra.*;
 import interfaz.Menu;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JViewport;
+import logica.Categoria;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import persistencia.Excepciones;
 
 
 
@@ -24,12 +30,20 @@ import javax.swing.JViewport;
 public class Categorias extends javax.swing.JFrame {
 
     private JLabel blackScreen;
+    private Juego juego;
+    private DefaultListModel modelo; 
+            
     
     /**
      * Creates new form PrePartida
      */
-    public Categorias() {
+    public Categorias() throws ClassNotFoundException, Excepciones {
         initComponents();
+        juego = Juego.getInstance();
+        jList1.setModel(modelo);
+        for (Categoria c : juego.getCategorias()){
+            modelo.addElement(c.getNombre());
+        }
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
 
@@ -256,21 +270,50 @@ public class Categorias extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        Menu entrada = new Menu();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Menu entrada = new Menu();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void añadirCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirCatActionPerformed
-        
+        try {
+            añadirCat addCat = new añadirCat();
+            addCat.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_añadirCatActionPerformed
 
     private void modCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCatActionPerformed
-        // TODO add your handling code here:
+        modCat modCat = new modCat();
+        modCat.setVisible(true);
     }//GEN-LAST:event_modCatActionPerformed
 
     private void borrarCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarCatActionPerformed
-        // TODO add your handling code here:
+    int seleccionado = jList1.getSelectedIndex();
+        if(seleccionado == -1){
+            JOptionPane.showMessageDialog(this, "ERROR: procure seleccionar un elemento");
+        }else{
+            Categoria categoria = juego.getCategorias().get(seleccionado);
+            String opcion = JOptionPane.showInputDialog(this, "Seguro que quiere eliminar la categoria "+categoria.getNombre()+"? (si/no)");
+            if (opcion.equals("si")){
+                modelo.remove(seleccionado);
+                juego.getCategorias().remove(jList1.getSelectedIndex());
+            }else{
+                JOptionPane.showMessageDialog(this, "Operacion cancelada");
+
+            }
+        }
+        
+        
     }//GEN-LAST:event_borrarCatActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
@@ -815,7 +858,13 @@ public class Categorias extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Categorias().setVisible(true);
+                try {
+                    new Categorias().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }

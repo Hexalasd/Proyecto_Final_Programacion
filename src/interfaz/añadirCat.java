@@ -4,7 +4,6 @@
  */
 package interfaz;
 
-import interfaz.extra.*;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
@@ -12,7 +11,13 @@ import java.awt.Cursor;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JViewport;
+import logica.Categoria;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import persistencia.Excepciones;
 
 
 
@@ -23,12 +28,14 @@ import javax.swing.JViewport;
 public class añadirCat extends javax.swing.JFrame {
 
     private JLabel blackScreen;
+    Juego juego;
     
     /**
      * Creates new form PrePartida
      */
-    public añadirCat() {
+    public añadirCat() throws ClassNotFoundException, Excepciones {
         initComponents();
+        juego = Juego.getInstance();
     }
     
     /**
@@ -44,8 +51,8 @@ public class añadirCat extends javax.swing.JFrame {
         Crear = new javax.swing.JButton();
         cattexto6 = new javax.swing.JLabel();
         cattexto10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        desc = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         menuText1 = new javax.swing.JLabel();
         configMenu = new javax.swing.JLabel();
 
@@ -74,28 +81,28 @@ public class añadirCat extends javax.swing.JFrame {
         cattexto10.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
         cattexto10.setForeground(new java.awt.Color(255, 255, 255));
         cattexto10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        cattexto10.setText("descripccion:");
-        jPanel1.add(cattexto10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 220, 30));
+        cattexto10.setText("descripcion:");
+        jPanel1.add(cattexto10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 220, 30));
 
-        jTextField6.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField6.setFont(new java.awt.Font("Pixeloid Sans", 0, 10)); // NOI18N
-        jTextField6.setBorder(null);
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        desc.setBackground(new java.awt.Color(7, 88, 119));
+        desc.setFont(new java.awt.Font("Pixeloid Sans", 0, 10)); // NOI18N
+        desc.setBorder(null);
+        desc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                descActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 380, 60));
+        jPanel1.add(desc, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 380, 60));
 
-        jTextField2.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField2.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
-        jTextField2.setBorder(null);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        nombre.setBackground(new java.awt.Color(7, 88, 119));
+        nombre.setFont(new java.awt.Font("Pixeloid Sans", 0, 14)); // NOI18N
+        nombre.setBorder(null);
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 170, 30));
+        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 170, 30));
 
         menuText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 50)); // NOI18N
         menuText1.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,17 +130,24 @@ public class añadirCat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_nombreActionPerformed
 
     private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
-       this.dispose();
+        String nombreC = nombre.getText();
+        String descC = desc.getText();
+        if(nombreC.trim().isEmpty() && descC.trim().isEmpty()){
+           JOptionPane.showMessageDialog(this, "ERROR: procure llenar ambos campos");
+       }else{
+            juego.addCategoria(nombreC, descC);
+            JOptionPane.showMessageDialog(this, "Categoria "+nombreC+" anadida correctamente");
+       }
     }//GEN-LAST:event_CrearActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void descActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_descActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
     /**
@@ -32933,7 +32947,13 @@ public class añadirCat extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new añadirCat().setVisible(true);
+                try {
+                    new añadirCat().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(añadirCat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(añadirCat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
@@ -32943,9 +32963,9 @@ public class añadirCat extends javax.swing.JFrame {
     private javax.swing.JLabel cattexto10;
     private javax.swing.JLabel cattexto6;
     private javax.swing.JLabel configMenu;
+    private javax.swing.JTextField desc;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel menuText1;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,15 +4,20 @@
  */
 package interfaz;
 
-import interfaz.extra.*;
 import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import logica.Categoria;
+import logica.Juego;
+import logica.Jugador;
+import logica.Pregunta;
+import persistencia.Excepciones;
 
 
 
@@ -23,12 +28,20 @@ import javax.swing.JViewport;
 public class modCat extends javax.swing.JFrame {
 
     private JLabel blackScreen;
+    private Juego juego;
+    private DefaultListModel modelo;
     
     /**
      * Creates new form PrePartida
      */
-    public modCat() {
+    public modCat() throws ClassNotFoundException, Excepciones {
         initComponents();
+        juego = Juego.getInstance();
+        modelo = new DefaultListModel();
+        jList1.setModel(modelo);
+        for (Categoria c : juego.getCategorias()){
+            modelo.addElement(c.getNombre());
+        }
     }
     
     /**
@@ -16566,7 +16579,13 @@ public class modCat extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new modCat().setVisible(true);
+                try {
+                    new modCat().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(modCat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(modCat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
