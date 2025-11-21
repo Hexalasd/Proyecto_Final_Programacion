@@ -164,13 +164,18 @@ public class modCat extends javax.swing.JFrame {
        int posicion = jList1.getSelectedIndex();
        Categoria categoria = juego.getCategorias().get(posicion);
         
-       if(nombreC.trim().isEmpty() && descC.trim().isEmpty()){
+       if(nombreC.trim().isEmpty() || descC.trim().isEmpty()){
            JOptionPane.showMessageDialog(this, "ERROR: procure completar ambos campos");
        }else{
            categoria.setNombre(nombreC);
            categoria.setDescripcion(descC);
            JOptionPane.showMessageDialog(this, "Categoría "+categoria.getNombre()+" actualizada con exito");
-
+           try {
+               juego.guardarColeccion();
+           } catch (Excepciones ex) {
+               System.getLogger(modCat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+           }
+           this.dispose();
        }
     }//GEN-LAST:event_CrearActionPerformed
 
