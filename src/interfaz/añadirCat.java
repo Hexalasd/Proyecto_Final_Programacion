@@ -137,11 +137,17 @@ public class añadirCat extends javax.swing.JFrame {
     private void CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearActionPerformed
         String nombreC = nombre.getText();
         String descC = desc.getText();
-        if(nombreC.trim().isEmpty() && descC.trim().isEmpty()){
+        if(nombreC.trim().isEmpty() || descC.trim().isEmpty()){
            JOptionPane.showMessageDialog(this, "ERROR: procure llenar ambos campos");
        }else{
             juego.addCategoria(nombreC, descC);
             JOptionPane.showMessageDialog(this, "Categoria "+nombreC+" anadida correctamente");
+            try {
+                juego.guardarColeccion();
+            } catch (Excepciones ex) {
+                System.getLogger(añadirCat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+            this.dispose();
        }
     }//GEN-LAST:event_CrearActionPerformed
 
