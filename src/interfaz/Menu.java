@@ -301,9 +301,15 @@ private void cargarFuentePixel() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJugarActionPerformed
+    try {
         PrePartida entrada = new PrePartida();
         entrada.setVisible(true);
         this.dispose();
+    } catch (ClassNotFoundException ex) {
+        System.getLogger(Menu.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+    } catch (Excepciones ex) {
+        System.getLogger(Menu.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+    }
     }//GEN-LAST:event_botonJugarActionPerformed
 
     private void botonRankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRankActionPerformed
@@ -322,15 +328,9 @@ private void cargarFuentePixel() {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void OpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcionesActionPerformed
-        String juegoPasswdInput = JOptionPane.showInputDialog(this, "Ingrese la contraseña de administrador:");
-        if (juegoPasswdInput.equals(juegoPasswd)){
-            JOptionPane.showMessageDialog(this, "Contraseña correcta, entrando al menu de configuracion...");
             Configuracion entrada = new Configuracion();
             entrada.setVisible(true);
             this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
-        }
     }//GEN-LAST:event_OpcionesActionPerformed
 
     public static void main(String args[]) {

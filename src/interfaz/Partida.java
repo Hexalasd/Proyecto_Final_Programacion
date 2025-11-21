@@ -11,18 +11,30 @@ import java.awt.Cursor;
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import logica.Categoria;
+import logica.Juego;
+import logica.Jugador;
+import logica.PartidaLogica;
+import logica.Pregunta;
+import persistencia.Excepciones;
+import persistencia.Respaldo;
+import persistencia.Serializador;
 
 /**
  *
  * @author hexal
  */
 public class Partida extends javax.swing.JFrame {
-
+    private PartidaLogica partida;
+    private Juego juego; 
     /**
      * Creates new form PrePartida
      */
-    public Partida() {
+    public Partida(PartidaLogica partida) throws ClassNotFoundException, Excepciones {
         initComponents();
+        juego = Juego.getInstance();
+        this.partida = partida;
+        
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
         miTextArea.setOpaque(false);
@@ -368,9 +380,15 @@ public class Partida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        Menu entrada = new Menu();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Menu entrada = new Menu();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Partida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Partida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         
         
     }//GEN-LAST:event_botonSalirActionPerformed
@@ -445,11 +463,17 @@ public class Partida extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
+        PartidaLogica partida = new PartidaLogica();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Partida().setVisible(true);
+                try {
+                    new Partida(partida).setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(Partida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(Partida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }

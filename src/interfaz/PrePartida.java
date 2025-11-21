@@ -10,19 +10,39 @@ import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JLayeredPane;
-
+import javax.swing.JOptionPane;
+import logica.Categoria;
+import logica.Juego;
+import logica.Jugador;
+import logica.PartidaLogica;
+import logica.Pregunta;
+import persistencia.Excepciones;
+import persistencia.Respaldo;
+import persistencia.Serializador;
 /**
  *
  * @author hexal
  */
 public class PrePartida extends javax.swing.JFrame {
+    private Juego juego;
+    private DefaultListModel modelo;
+    private ArrayList<Jugador> jugadoresPartida;
 
     /**
      * Creates new form PrePartida
      */
-    public PrePartida() {
+    public PrePartida() throws ClassNotFoundException, Excepciones {
         initComponents();
+        modelo = new DefaultListModel();
+        juego = Juego.getInstance();
+        jList1.setModel(modelo);
+        for (int i=0; i < juego.getCategorias().size(); i++){
+            jComboBox1.addItem(juego.getCategorias().get(i).getNombre());
+        }
+        jugadoresPartida = new ArrayList<>();
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(configMenu, 2, 0.03);
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
@@ -51,8 +71,8 @@ public class PrePartida extends javax.swing.JFrame {
         botonSalir = new javax.swing.JButton();
         iniciarPart = new javax.swing.JButton();
         eliminarJug = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        name = new javax.swing.JTextField();
+        contra = new javax.swing.JPasswordField();
         aniadirJug = new javax.swing.JButton();
         listaJug = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -93,6 +113,7 @@ public class PrePartida extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox1.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Random" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 600, 140, 50));
 
         botonSalir.setBorderPainted(false);
@@ -125,19 +146,19 @@ public class PrePartida extends javax.swing.JFrame {
         });
         jPanel1.add(eliminarJug, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 190, 120, 110));
 
-        jTextField1.setBackground(new java.awt.Color(7, 88, 119));
-        jTextField1.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        name.setBackground(new java.awt.Color(7, 88, 119));
+        name.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
+        name.setBorder(null);
+        name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                nameActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 330, 250, 70));
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 330, 250, 70));
 
-        jPasswordField1.setBackground(new java.awt.Color(7, 88, 119));
-        jPasswordField1.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 250, 70));
+        contra.setBackground(new java.awt.Color(7, 88, 119));
+        contra.setFont(new java.awt.Font("Pixeloid Sans", 0, 24)); // NOI18N
+        jPanel1.add(contra, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 250, 70));
 
         aniadirJug.setBorderPainted(false);
         aniadirJug.setContentAreaFilled(false);
@@ -233,6 +254,7 @@ public class PrePartida extends javax.swing.JFrame {
 
         jComboBox2.setBackground(new java.awt.Color(7, 88, 119));
         jComboBox2.setFont(new java.awt.Font("Pixeloid Sans", 3, 18)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "5", "6", "7", "8", "9", "10" }));
         jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 600, 140, 50));
 
         menuText.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
@@ -323,28 +345,90 @@ public class PrePartida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        Menu entrada = new Menu();
-        entrada.setVisible(true);
-        this.dispose();
+        try {
+            Menu entrada = new Menu();
+            entrada.setVisible(true);
+            this.dispose();
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(PrePartida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(PrePartida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void iniciarPartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarPartActionPerformed
-        Partida entrada = new Partida();
-        entrada.setVisible(true);
-        this.dispose();
+        if(jugadoresPartida.size() >=2){
+            try {
+                String categoria = (String) jComboBox1.getSelectedItem();
+                int rondas = (int) jComboBox2.getSelectedItem();
+                
+                PartidaLogica partida = new PartidaLogica(jugadoresPartida, categoria, rondas);
+                
+                Partida entrada = new Partida(partida);
+                entrada.setVisible(true);
+                this.dispose();
+            } catch (ClassNotFoundException ex) {
+                System.getLogger(PrePartida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            } catch (Excepciones ex) {
+                System.getLogger(PrePartida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "ERROR: deben haber por lo menos dos jugadores para comenzar la partida");
+        }
                 
     }//GEN-LAST:event_iniciarPartActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_nameActionPerformed
 
     private void eliminarJugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarJugActionPerformed
-        // TODO add your handling code here:
+        int seleccionado = jList1.getSelectedIndex();
+        if(seleccionado == -1){
+            JOptionPane.showMessageDialog(this, "ERROR: debe seleccionar un jugador para quitarlo de la lista");
+        }else{
+            Jugador jugador = jugadoresPartida.get(seleccionado);
+            jugadoresPartida.remove(jugador);
+            modelo.remove(seleccionado);
+        }
     }//GEN-LAST:event_eliminarJugActionPerformed
 
     private void aniadirJugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aniadirJugActionPerformed
-        // TODO add your handling code here:
+        String nombre = name.getText();
+        String passwd = new String(contra.getPassword());
+        
+        if(nombre.trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "ERROR: debe ingresar un nombre");
+        }else{
+            int i = 0;
+            boolean encontrado = false;
+            do{
+                String nombre2 = juego.getJugadores().get(i).getNombre();
+                if(nombre.equals(nombre2)){
+                    encontrado = true;
+                }else{
+                    i++;
+                }
+            }while ((encontrado = false) && (i < juego.getJugadores().size()));
+            
+            
+            
+            if (encontrado){
+                Jugador jugador = juego.getJugadores().get(i);
+                
+                if(jugador.getTipo() == "sistema"){
+                    jugadoresPartida.add(jugador);
+                    modelo.addElement(jugador.getNombre());
+                }else{
+                    if(jugador.getPasswd().equals(passwd)){
+                        jugadoresPartida.add(jugador);
+                        modelo.addElement(jugador.getNombre());
+                    }else{
+                        JOptionPane.showMessageDialog(this, "ERROR: contaseña incorrecta");
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_aniadirJugActionPerformed
 
     /**
@@ -377,7 +461,13 @@ public class PrePartida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrePartida().setVisible(true);
+                try {
+                    new PrePartida().setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    System.getLogger(PrePartida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                } catch (Excepciones ex) {
+                    System.getLogger(PrePartida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }
@@ -394,6 +484,7 @@ public class PrePartida extends javax.swing.JFrame {
     private javax.swing.JLabel cattexto6;
     private javax.swing.JLabel configMenu;
     private javax.swing.JLabel configMenu1;
+    private javax.swing.JPasswordField contra;
     private javax.swing.JButton eliminarJug;
     private javax.swing.JLabel eliminarJugador;
     private javax.swing.JLabel exitBo1;
@@ -403,8 +494,6 @@ public class PrePartida extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jugar;
     private javax.swing.JLabel jugar1;
     private javax.swing.JLabel jugar3;
@@ -419,6 +508,7 @@ public class PrePartida extends javax.swing.JFrame {
     private javax.swing.JLabel menuTextBase1;
     private javax.swing.JLabel menuTextShadow;
     private javax.swing.JLabel menuTextShadow1;
+    private javax.swing.JTextField name;
     private javax.swing.JLabel ponerUrs;
     private javax.swing.JLabel ponerUrs2;
     private javax.swing.JLabel ponerUrs3;
