@@ -271,7 +271,14 @@ public class Jugadores extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void añadirJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirJugadoresActionPerformed
-        
+        try {
+            añadirJug ventana = new añadirJug();
+            ventana.setVisible(true);
+        } catch (ClassNotFoundException ex) {
+            System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (Excepciones ex) {
+            System.getLogger(Jugadores.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_añadirJugadoresActionPerformed
 
     private void editarJugadores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarJugadores2ActionPerformed

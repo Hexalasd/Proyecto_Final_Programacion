@@ -119,7 +119,7 @@ public class Configuracion extends javax.swing.JFrame {
                 botonSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 110, 120));
+        jPanel1.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 120));
 
         jugarText.setFont(new java.awt.Font("Pixeloid Sans", 0, 48)); // NOI18N
         jugarText.setForeground(new java.awt.Color(255, 255, 255));

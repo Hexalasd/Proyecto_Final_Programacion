@@ -8,6 +8,8 @@ import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -174,18 +176,26 @@ public class modJug extends javax.swing.JFrame {
                 if (jugador.getTipo().equals("sistema")){
                    contrasenia.setText("");
                  }else{
-                    String contraseniaAnterior =JOptionPane.showInputDialog(this, "Ingrese la contrasena anterior del usuario");
-                    if (jugador.getPasswd().equals(contraseniaAnterior)){
+                    
                         jugador.setPasswd(contrasenia.getText());  
                         JOptionPane.showMessageDialog(this, "Contrasena cambiada exitosamente");
-                    }
+                    
                 }
             }
         }else{
             JOptionPane.showMessageDialog(this, "ERROR: asegurese de seleccionar un usuario");
         }
-        
-        
+        try {
+            juego.guardarColeccion();
+        } catch (Excepciones ex) {
+            Logger.getLogger(modJug.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         try {
+            juego.guardarColeccion();
+        } catch (Excepciones ex) {
+            Logger.getLogger(añadirJug.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
     }//GEN-LAST:event_CrearActionPerformed
 
     private void contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseniaActionPerformed

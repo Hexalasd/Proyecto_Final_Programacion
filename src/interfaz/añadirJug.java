@@ -8,6 +8,8 @@ import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -176,7 +178,7 @@ public class añadirJug extends javax.swing.JFrame {
         String sPasswd = passwd.getText();
        
         if(btn1.isSelected()){
-            if(sUsuario.trim().isEmpty() && sPasswd.trim().isEmpty()){
+            if(sUsuario.trim().isEmpty() || sPasswd.trim().isEmpty()){
                 JOptionPane.showMessageDialog(this, "ERROR: procure rellenar todos los campos");
             }else{
                 juego.addJugador(sUsuario, sPasswd);
@@ -188,7 +190,13 @@ public class añadirJug extends javax.swing.JFrame {
                 juego.addJugador(sUsuario);
             }
         }
-     
+        JOptionPane.showMessageDialog(this, "USR Creado: FREAKBOBJUMPSCARE");
+        try {
+            juego.guardarColeccion();
+        } catch (Excepciones ex) {
+            Logger.getLogger(añadirJug.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     this.dispose();
     }//GEN-LAST:event_CrearActionPerformed
 
     private void passwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwdActionPerformed
