@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
+import javax.swing.Timer;
 import logica.Categoria;
 import logica.Juego;
 import logica.Jugador;
@@ -28,6 +29,9 @@ import persistencia.Serializador;
 public class Partida extends javax.swing.JFrame {
     private PartidaLogica partida;
     private Juego juego; 
+    private Timer timer;
+    private int tiempoRestante;
+    private Pregunta pregunta;
     /**
      * Creates new form PrePartida
      */
@@ -74,35 +78,7 @@ public class Partida extends javax.swing.JFrame {
     }
     
     public void iniciarPartida(){
-        /*
-         tengo que hacer la spartidas para los jugadores
-         el jugador me indica la cantidad de rondas. una ronda es que todos los jugadores hayan completado su turno. 
-         para saber eso tengo que calcular la cantidada de rondas que va a haber (rondas*persona=partidas)
-         ahora se las partidas, pero como lo hago aca?
-         puedo hacer un for ya que se la cantidad de partidas que se van a jugar, y tengo un contador en mi clase.
-         el for tendria que ser aca adentro despeus del init components.
-         se repetiria tantas veces como rondas yo calcule. 
-         voy a usar la misma interfaz varias veces, cambiano los textos.
-        ahora tengo todos los jugadores. tengo que, primero que nada, hacer un contador que cuando llegue a 3 se reinicie, para
-        ir viendo qeu jugador
-        turno tiene que ser siempre un numero entre 0 y 1 o hasta 3 dependiendo la cantidad de jugadores que haya
-         bueno a tengo resuelto lo de los usuarios, ahora tengo que ver de donde saco las preguntas. el tipo de preguntas que se
-         van a hacer podria perfectamente sacarlo de la clase prePartida y ponerlas en un array preguntas en partidaLogica
-         eso estaria bueno poruqe me evita hacerlo aca que ya es un despelote 
-         y de ahi puedo agarrar un numero random del arraylist (que no me acuerdo como se hacia) y poner regutnaas random.
-         voy a dejar que se repitan poruqe si tenes poquitas y no se pueden repetir entonces se rompe todo. voy a hacer le array
-         ese de preguntas para ponerlo en la clase la otra
-         hasta ahora ya deberian tener los valores asignados todos los campos de texto. ahora me faltan 2 cosas:
-         el tiempo y la respuesta de la pregunta+puntaje
-         creo que va a ser mas facil tratar de atinar a ver como es uqe se consigue el puntaje
-         l apersona va a tocar uno de lso 4 botones. la cagada es qe los botonos no son lo que tiene el texto, pero tengo
-         los otros cosos vinculados con el mismo numero asi qeu no pasa nada
-         bueno, consigo el texto y lo comparo con la respuesta correcta. si son iguales entonces sumo un punto "localmente"
-         (en el array coordinado que tengo para putnos). lo que no se es si sin cooldown me va a esperar a que conteste. no no
-         va a esperar. dejar dar click al boton tiene que dejar asi que de eso no me preocupo. lo que tengo que hacer eahora es,
-         antes de pegarme 3 tiros, ponerle a los botones que si los clickeas te agarra la respuesta en una variable string y la compara
-         con la correca. si esta bien, al jugador que le corresponda el turno se lleva el putno
-         */
+         
         
         //comentarios porque si no me mareo
         
@@ -142,7 +118,7 @@ public class Partida extends javax.swing.JFrame {
             
             //la pregunta
             Pregunta pregunta = partida.getPreguntas().get(random);
-            
+            this.pregunta=pregunta;
             //lleno en la interfaz
             textPregunta.setText(pregunta.getPregunta());
 
@@ -173,10 +149,34 @@ public class Partida extends javax.swing.JFrame {
             textR3.setText(pregunta.getPosiblesRespuestas().get(numeros[2]));
             textR4.setText(pregunta.getPosiblesRespuestas().get(numeros[3]));
             
+            iniciarTimerPregunta();
+            
             turno++;
         }
         
     }
+    
+    public void iniciarTimerPregunta() {
+    tiempoRestante = 10; // segundos, podés cambiarlo
+
+    // si ya había un timer andando, lo detengo
+    if (timer != null) {
+        timer.stop();
+    }
+
+    timer = new Timer(1000, e -> { // se ejecuta cada 1 segundo
+        lblTiempo.setText("Tiempo: " + tiempoRestante);
+
+        tiempoRestante--;
+
+        if (tiempoRestante < 0) {
+            timer.stop();
+        }
+    });
+
+    timer.start(); // comienza
+}
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -190,6 +190,7 @@ public class Partida extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
         textPregunta = new javax.swing.JTextField();
+        lblTiempo = new javax.swing.JLabel();
         textR4 = new javax.swing.JTextField();
         textR2 = new javax.swing.JTextField();
         textR1 = new javax.swing.JTextField();
@@ -219,10 +220,12 @@ public class Partida extends javax.swing.JFrame {
         puntosShadow = new javax.swing.JLabel();
         triviaRespuesta2 = new javax.swing.JLabel();
         triviaRespuesta3 = new javax.swing.JLabel();
-        Pregunta = new javax.swing.JLabel();
         triviaRespuesta5 = new javax.swing.JLabel();
         triviaRespuesta6 = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -249,6 +252,12 @@ public class Partida extends javax.swing.JFrame {
             }
         });
         jPanel1.add(textPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 1010, 180));
+
+        lblTiempo.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
+        lblTiempo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTiempo.setText("*TIEMPO*");
+        jPanel1.add(lblTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 190, 800, 190));
 
         textR4.setEditable(false);
         textR4.setBackground(new java.awt.Color(60, 59, 64));
@@ -452,9 +461,6 @@ public class Partida extends javax.swing.JFrame {
         triviaRespuesta3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
         jPanel1.add(triviaRespuesta3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 620, 680, 190));
 
-        Pregunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Pregunta.png"))); // NOI18N
-        jPanel1.add(Pregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 1580, 550));
-
         triviaRespuesta5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Jugaf2.png"))); // NOI18N
         triviaRespuesta5.setText("asdad");
         jPanel1.add(triviaRespuesta5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 830, 680, 190));
@@ -465,6 +471,15 @@ public class Partida extends javax.swing.JFrame {
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/recursos/Partida.png"))); // NOI18N
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 1920, 1080));
+
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, -1));
+
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
+
+        jLabel3.setText("jLabel3");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -521,7 +536,9 @@ public class Partida extends javax.swing.JFrame {
 
     private void botonRespuesta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRespuesta1ActionPerformed
         String respuesta = textR1.getText();
-        if(respuesta.equals(pregunta.))
+        if(respuesta.equals(pregunta.getRespuestaCorrecta())){
+            
+        }
     }//GEN-LAST:event_botonRespuesta1ActionPerformed
 
     private void botonRespuesta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRespuesta2ActionPerformed
@@ -592,7 +609,6 @@ java.awt.EventQueue.invokeLater(new Runnable() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Pregunta;
     private javax.swing.JButton botonRespuesta1;
     private javax.swing.JButton botonRespuesta2;
     private javax.swing.JButton botonRespuesta3;
@@ -603,7 +619,11 @@ java.awt.EventQueue.invokeLater(new Runnable() {
     private javax.swing.JLabel cat3;
     private javax.swing.JLabel exitBo;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblTiempo;
     private javax.swing.JLabel menuText;
     private javax.swing.JLabel menuTextBase;
     private javax.swing.JLabel menuTextShadow;
