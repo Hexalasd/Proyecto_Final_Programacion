@@ -5,10 +5,13 @@ import java.util.ArrayList;
 public class PartidaLogica {
     
     private ArrayList<Jugador> jugadores;
+    private ArrayList<Pregunta> preguntas;
+    private int[] puntos = new int[4];
     private String categotia;
     private int rondas;
+    private int cantPartidas;
 
-    public PartidaLogica(ArrayList<Jugador> jugadores, String categotia, int rondas) {
+    public PartidaLogica(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas, String categotia, int rondas) {
         this.jugadores = jugadores;
         this.categotia = categotia;
         this.rondas = rondas;
@@ -17,7 +20,31 @@ public class PartidaLogica {
 
     }
 
+    public ArrayList<Pregunta> getPreguntas() {
+        return preguntas;
+    }
 
+    public void setPreguntas(ArrayList<Pregunta> preguntas) {
+        this.preguntas = preguntas;
+    }
+
+    public int getCantPartidas() {
+        return cantPartidas;
+    }
+
+    public void setCantPartidas(int cantPartidas) {
+        this.cantPartidas = cantPartidas;
+    }
+
+    public int[] getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int[] puntos) {
+        this.puntos = puntos;
+    }
+
+    
     public ArrayList<Jugador> getJugadores() {
         return jugadores;
     }

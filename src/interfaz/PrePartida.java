@@ -362,11 +362,28 @@ public class PrePartida extends javax.swing.JFrame {
                 String categoria = (String) jComboBox1.getSelectedItem();
                 int rondas = (int) jComboBox2.getSelectedItem();
                 
-                PartidaLogica partida = new PartidaLogica(jugadoresPartida, categoria, rondas);
                 
-                Partida entrada = new Partida(partida);
-                entrada.setVisible(true);
-                this.dispose();
+                ArrayList<Pregunta> preguntas = new ArrayList<>();
+                if(!categoria.equals("Random")){
+                    for(Pregunta p : juego.getPreguntas()){
+                        if(p.getCategoria().equals(categoria)){
+                            preguntas.add(p);
+                        }
+                    }   
+                }else{
+                    preguntas = juego.getPreguntas();
+                }
+                
+                
+                if (!preguntas.isEmpty()){
+                    PartidaLogica partida = new PartidaLogica(jugadoresPartida, preguntas, categoria, rondas);
+
+                    Partida entrada = new Partida(partida);
+                    entrada.setVisible(true);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(this, "ERROR: no existen preguntas de esta categoria");
+                }
             } catch (ClassNotFoundException ex) {
                 System.getLogger(PrePartida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             } catch (Excepciones ex) {

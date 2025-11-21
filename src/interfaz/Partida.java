@@ -8,6 +8,7 @@ import interfaz.clasesAuxiliares.AnimatorSwing;
 import interfaz.clasesAuxiliares.FadeOverlay;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
@@ -37,26 +38,26 @@ public class Partida extends javax.swing.JFrame {
         
         botonSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AnimatorSwing.floatAnimation(fondo, 6, 0.01);
-        miTextArea.setOpaque(false);
-        miTextArea.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
-        miTextArea.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
-        miTextArea.setEditable(false); // Solo lectura
-        miTextArea1.setOpaque(false);
-        miTextArea1.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
-        miTextArea1.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
-        miTextArea1.setEditable(false); // Solo lectura
-        miTextArea2.setOpaque(false);
-        miTextArea2.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
-        miTextArea2.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
-        miTextArea2.setEditable(false); // Solo lectura
-               miTextArea3.setOpaque(false);
-        miTextArea3.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
-        miTextArea3.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
-        miTextArea3.setEditable(false); // Solo lectura
-                   miTextArea4.setOpaque(false);
-        miTextArea4.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
-        miTextArea4.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
-        miTextArea4.setEditable(false); // Solo lectura
+        textPregunta.setOpaque(false);
+        textPregunta.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
+        textPregunta.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
+        textPregunta.setEditable(false); // Solo lectura
+        textR4.setOpaque(false);
+        textR4.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
+        textR4.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
+        textR4.setEditable(false); // Solo lectura
+        textR2.setOpaque(false);
+        textR2.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
+        textR2.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
+        textR2.setEditable(false); // Solo lectura
+               textR1.setOpaque(false);
+        textR1.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
+        textR1.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
+        textR1.setEditable(false); // Solo lectura
+                   textR3.setOpaque(false);
+        textR3.setBackground(new Color(0, 0, 0, 0)); // Totalmente transparente
+        textR3.setBorder(BorderFactory.createEmptyBorder()); // Sin bordes
+        textR3.setEditable(false); // Solo lectura
         
         // Fade de entrada al abrir la aplicación
          FadeOverlay overlay = new FadeOverlay(10, 10, Color.WHITE, () -> {
@@ -66,11 +67,115 @@ public class Partida extends javax.swing.JFrame {
          getLayeredPane().add(overlay, JLayeredPane.MODAL_LAYER);
          overlay.setBounds(0, 0, getWidth(), getHeight());
          overlay.start();
-        
-        
+     
+
         
 
+    }
+    
+    public void iniciarPartida(){
+        /*
+         tengo que hacer la spartidas para los jugadores
+         el jugador me indica la cantidad de rondas. una ronda es que todos los jugadores hayan completado su turno. 
+         para saber eso tengo que calcular la cantidada de rondas que va a haber (rondas*persona=partidas)
+         ahora se las partidas, pero como lo hago aca?
+         puedo hacer un for ya que se la cantidad de partidas que se van a jugar, y tengo un contador en mi clase.
+         el for tendria que ser aca adentro despeus del init components.
+         se repetiria tantas veces como rondas yo calcule. 
+         voy a usar la misma interfaz varias veces, cambiano los textos.
+        ahora tengo todos los jugadores. tengo que, primero que nada, hacer un contador que cuando llegue a 3 se reinicie, para
+        ir viendo qeu jugador
+        turno tiene que ser siempre un numero entre 0 y 1 o hasta 3 dependiendo la cantidad de jugadores que haya
+         bueno a tengo resuelto lo de los usuarios, ahora tengo que ver de donde saco las preguntas. el tipo de preguntas que se
+         van a hacer podria perfectamente sacarlo de la clase prePartida y ponerlas en un array preguntas en partidaLogica
+         eso estaria bueno poruqe me evita hacerlo aca que ya es un despelote 
+         y de ahi puedo agarrar un numero random del arraylist (que no me acuerdo como se hacia) y poner regutnaas random.
+         voy a dejar que se repitan poruqe si tenes poquitas y no se pueden repetir entonces se rompe todo. voy a hacer le array
+         ese de preguntas para ponerlo en la clase la otra
+         hasta ahora ya deberian tener los valores asignados todos los campos de texto. ahora me faltan 2 cosas:
+         el tiempo y la respuesta de la pregunta+puntaje
+         creo que va a ser mas facil tratar de atinar a ver como es uqe se consigue el puntaje
+         l apersona va a tocar uno de lso 4 botones. la cagada es qe los botonos no son lo que tiene el texto, pero tengo
+         los otros cosos vinculados con el mismo numero asi qeu no pasa nada
+         bueno, consigo el texto y lo comparo con la respuesta correcta. si son iguales entonces sumo un punto "localmente"
+         (en el array coordinado que tengo para putnos). lo que no se es si sin cooldown me va a esperar a que conteste. no no
+         va a esperar. dejar dar click al boton tiene que dejar asi que de eso no me preocupo. lo que tengo que hacer eahora es,
+         antes de pegarme 3 tiros, ponerle a los botones que si los clickeas te agarra la respuesta en una variable string y la compara
+         con la correca. si esta bien, al jugador que le corresponda el turno se lleva el putno
+         */
+        
+        //comentarios porque si no me mareo
+        
+        //pongo la categoria desde ya en a interfaz
+        cat1.setText(partida.getCategotia());
+        cat2.setText(partida.getCategotia());
+        cat3.setText(partida.getCategotia());
+        
+        
+        //la cantidad de partidas va a ser los jugadoeres*las rondas
+        int cantPartidas = (partida.getJugadores().size())*(partida.getRondas());
+        //lo guardamos en partida porque si
+        partida.setCantPartidas(cantPartidas);
+        //variable para contar de quien es el turno
+        int turno = 0;
+        int i;
+        
+        //for que va a ir partida por partida
+        for(i = 0; i < partida.getCantPartidas(); i++){
+            if(turno == partida.getJugadores().size()){
+                turno=0;
+            }
+            //el jugador que le corresponde el turno
+            Jugador j = partida.getJugadores().get(turno);
+            //guardamos el nombre en una variable para que se vea mas prolijo
+            String user = j.getNombre();
+            
+            //ponemos los detalles en la interfaz
+            usuario1.setText(user);
+            usuario2.setText(user);
+            usuario3.setText(user);
+            
+            //creamos un objeto que sirve para obtener numeros random
+            Random rand = new Random();
+            //numero random para que toquen preguntas random del array
+            int random = rand.nextInt(partida.getPreguntas().size());
+            
+            //la pregunta
+            Pregunta pregunta = partida.getPreguntas().get(random);
+            
+            //lleno en la interfaz
+            textPregunta.setText(pregunta.getPregunta());
 
+            //numeros para que las preguntas salgan random
+            boolean repetido;
+            //al principio van a ser todos -1 porque si son 0 (valor inicial) wl while que viene ahora no anda bien
+            int[] numeros = {-1, -1, -1, -1};
+            //no se si esta andando, lo dudo
+            for (i = 0; i<4; i++){
+                repetido=true;
+                while (repetido){
+                    random = rand.nextInt(4);
+                    
+                    if(random != numeros[0]){
+                        if(random != numeros[1]){
+                            if(random != numeros[2]){
+                                repetido=false;
+                            }  
+                        }  
+                    }
+                }
+            numeros[i] = random;
+                  
+            }
+                 
+            textR1.setText(pregunta.getPosiblesRespuestas().get(numeros[0]));
+            textR2.setText(pregunta.getPosiblesRespuestas().get(numeros[1]));
+            textR3.setText(pregunta.getPosiblesRespuestas().get(numeros[2]));
+            textR4.setText(pregunta.getPosiblesRespuestas().get(numeros[3]));
+            
+            turno++;
+        }
+        
     }
     
     /**
@@ -84,11 +189,11 @@ public class Partida extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
-        miTextArea = new javax.swing.JTextField();
-        miTextArea1 = new javax.swing.JTextField();
-        miTextArea2 = new javax.swing.JTextField();
-        miTextArea3 = new javax.swing.JTextField();
-        miTextArea4 = new javax.swing.JTextField();
+        textPregunta = new javax.swing.JTextField();
+        textR4 = new javax.swing.JTextField();
+        textR2 = new javax.swing.JTextField();
+        textR1 = new javax.swing.JTextField();
+        textR3 = new javax.swing.JTextField();
         botonRespuesta1 = new javax.swing.JButton();
         botonRespuesta2 = new javax.swing.JButton();
         botonRespuesta3 = new javax.swing.JButton();
@@ -97,12 +202,12 @@ public class Partida extends javax.swing.JFrame {
         menuText = new javax.swing.JLabel();
         menuTextBase = new javax.swing.JLabel();
         menuTextShadow = new javax.swing.JLabel();
-        ursText1 = new javax.swing.JLabel();
-        usrTextBase1 = new javax.swing.JLabel();
-        usrTextShadow1 = new javax.swing.JLabel();
-        catText1 = new javax.swing.JLabel();
-        catTextBase1 = new javax.swing.JLabel();
-        catTextShadow1 = new javax.swing.JLabel();
+        usuario1 = new javax.swing.JLabel();
+        usuario2 = new javax.swing.JLabel();
+        usuario3 = new javax.swing.JLabel();
+        cat1 = new javax.swing.JLabel();
+        cat2 = new javax.swing.JLabel();
+        cat3 = new javax.swing.JLabel();
         tCatText2 = new javax.swing.JLabel();
         tCatTextBase2 = new javax.swing.JLabel();
         tCatTextShadow2 = new javax.swing.JLabel();
@@ -133,65 +238,65 @@ public class Partida extends javax.swing.JFrame {
         });
         jPanel1.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 110, 120));
 
-        miTextArea.setEditable(false);
-        miTextArea.setBackground(new java.awt.Color(60, 59, 64));
-        miTextArea.setFont(new java.awt.Font("Pixeloid Sans", 1, 24)); // NOI18N
-        miTextArea.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        miTextArea.setBorder(null);
-        miTextArea.addActionListener(new java.awt.event.ActionListener() {
+        textPregunta.setEditable(false);
+        textPregunta.setBackground(new java.awt.Color(60, 59, 64));
+        textPregunta.setFont(new java.awt.Font("Pixeloid Sans", 1, 24)); // NOI18N
+        textPregunta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textPregunta.setBorder(null);
+        textPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miTextAreaActionPerformed(evt);
+                textPreguntaActionPerformed(evt);
             }
         });
-        jPanel1.add(miTextArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 1010, 180));
+        jPanel1.add(textPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 1010, 180));
 
-        miTextArea1.setEditable(false);
-        miTextArea1.setBackground(new java.awt.Color(60, 59, 64));
-        miTextArea1.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
-        miTextArea1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        miTextArea1.setBorder(null);
-        miTextArea1.addActionListener(new java.awt.event.ActionListener() {
+        textR4.setEditable(false);
+        textR4.setBackground(new java.awt.Color(60, 59, 64));
+        textR4.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        textR4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textR4.setBorder(null);
+        textR4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miTextArea1ActionPerformed(evt);
+                textR4ActionPerformed(evt);
             }
         });
-        jPanel1.add(miTextArea1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 910, 260, 80));
+        jPanel1.add(textR4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 910, 260, 80));
 
-        miTextArea2.setEditable(false);
-        miTextArea2.setBackground(new java.awt.Color(60, 59, 64));
-        miTextArea2.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
-        miTextArea2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        miTextArea2.setBorder(null);
-        miTextArea2.addActionListener(new java.awt.event.ActionListener() {
+        textR2.setEditable(false);
+        textR2.setBackground(new java.awt.Color(60, 59, 64));
+        textR2.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        textR2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textR2.setBorder(null);
+        textR2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miTextArea2ActionPerformed(evt);
+                textR2ActionPerformed(evt);
             }
         });
-        jPanel1.add(miTextArea2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 910, 260, 80));
+        jPanel1.add(textR2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 910, 260, 80));
 
-        miTextArea3.setEditable(false);
-        miTextArea3.setBackground(new java.awt.Color(60, 59, 64));
-        miTextArea3.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
-        miTextArea3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        miTextArea3.setBorder(null);
-        miTextArea3.addActionListener(new java.awt.event.ActionListener() {
+        textR1.setEditable(false);
+        textR1.setBackground(new java.awt.Color(60, 59, 64));
+        textR1.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        textR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textR1.setBorder(null);
+        textR1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miTextArea3ActionPerformed(evt);
+                textR1ActionPerformed(evt);
             }
         });
-        jPanel1.add(miTextArea3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 690, 260, 80));
+        jPanel1.add(textR1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 690, 260, 80));
 
-        miTextArea4.setEditable(false);
-        miTextArea4.setBackground(new java.awt.Color(60, 59, 64));
-        miTextArea4.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
-        miTextArea4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        miTextArea4.setBorder(null);
-        miTextArea4.addActionListener(new java.awt.event.ActionListener() {
+        textR3.setEditable(false);
+        textR3.setBackground(new java.awt.Color(60, 59, 64));
+        textR3.setFont(new java.awt.Font("Pixeloid Sans", 1, 14)); // NOI18N
+        textR3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textR3.setBorder(null);
+        textR3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miTextArea4ActionPerformed(evt);
+                textR3ActionPerformed(evt);
             }
         });
-        jPanel1.add(miTextArea4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 690, 260, 80));
+        jPanel1.add(textR3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 690, 260, 80));
 
         botonRespuesta1.setBorderPainted(false);
         botonRespuesta1.setContentAreaFilled(false);
@@ -250,41 +355,41 @@ public class Partida extends javax.swing.JFrame {
         menuTextShadow.setText("TURNO :");
         jPanel1.add(menuTextShadow, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, -50, 930, 270));
 
-        ursText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
-        ursText1.setForeground(new java.awt.Color(255, 255, 255));
-        ursText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ursText1.setText("*USUARIO*");
-        jPanel1.add(ursText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, -20, 800, 190));
+        usuario1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
+        usuario1.setForeground(new java.awt.Color(255, 255, 255));
+        usuario1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usuario1.setText("*USUARIO*");
+        jPanel1.add(usuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, -20, 800, 190));
 
-        usrTextBase1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
-        usrTextBase1.setForeground(new java.awt.Color(153, 153, 153));
-        usrTextBase1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        usrTextBase1.setText("*USUARIO*");
-        jPanel1.add(usrTextBase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, -50, 800, 260));
+        usuario2.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
+        usuario2.setForeground(new java.awt.Color(153, 153, 153));
+        usuario2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usuario2.setText("*USUARIO*");
+        jPanel1.add(usuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, -50, 800, 260));
 
-        usrTextShadow1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
-        usrTextShadow1.setForeground(new java.awt.Color(59, 113, 118));
-        usrTextShadow1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        usrTextShadow1.setText("*USUARIO*");
-        jPanel1.add(usrTextShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, -50, 930, 270));
+        usuario3.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
+        usuario3.setForeground(new java.awt.Color(59, 113, 118));
+        usuario3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usuario3.setText("*USUARIO*");
+        jPanel1.add(usuario3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, -50, 930, 270));
 
-        catText1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
-        catText1.setForeground(new java.awt.Color(255, 255, 255));
-        catText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        catText1.setText("CATEGORIA:");
-        jPanel1.add(catText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 800, 190));
+        cat1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
+        cat1.setForeground(new java.awt.Color(255, 255, 255));
+        cat1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cat1.setText("CATEGORIA:");
+        jPanel1.add(cat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 800, 190));
 
-        catTextBase1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
-        catTextBase1.setForeground(new java.awt.Color(153, 153, 153));
-        catTextBase1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        catTextBase1.setText("CATEGORIA:");
-        jPanel1.add(catTextBase1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 800, 260));
+        cat2.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
+        cat2.setForeground(new java.awt.Color(153, 153, 153));
+        cat2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cat2.setText("CATEGORIA:");
+        jPanel1.add(cat2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 800, 260));
 
-        catTextShadow1.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
-        catTextShadow1.setForeground(new java.awt.Color(59, 113, 118));
-        catTextShadow1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        catTextShadow1.setText("CATEGORIA:");
-        jPanel1.add(catTextShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 930, 270));
+        cat3.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
+        cat3.setForeground(new java.awt.Color(59, 113, 118));
+        cat3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cat3.setText("CATEGORIA:");
+        jPanel1.add(cat3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 930, 270));
 
         tCatText2.setFont(new java.awt.Font("Pixeloid Sans", 0, 70)); // NOI18N
         tCatText2.setForeground(new java.awt.Color(255, 255, 255));
@@ -394,28 +499,29 @@ public class Partida extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
  // SI ES CORRECTA O NO CORRECTA AÑADIR UN JOPTION PANE QUE DIGA SI ES CORRECTA O INCORRECTA LA OPCION
     
-    private void miTextAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTextAreaActionPerformed
+    private void textPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPreguntaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miTextAreaActionPerformed
+    }//GEN-LAST:event_textPreguntaActionPerformed
 
-    private void miTextArea1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTextArea1ActionPerformed
+    private void textR4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textR4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miTextArea1ActionPerformed
+    }//GEN-LAST:event_textR4ActionPerformed
 
-    private void miTextArea2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTextArea2ActionPerformed
+    private void textR2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textR2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miTextArea2ActionPerformed
+    }//GEN-LAST:event_textR2ActionPerformed
 
-    private void miTextArea3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTextArea3ActionPerformed
+    private void textR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textR1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miTextArea3ActionPerformed
+    }//GEN-LAST:event_textR1ActionPerformed
 
-    private void miTextArea4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTextArea4ActionPerformed
+    private void textR3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textR3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miTextArea4ActionPerformed
+    }//GEN-LAST:event_textR3ActionPerformed
 
     private void botonRespuesta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRespuesta1ActionPerformed
-        // TODO add your handling code here:
+        String respuesta = textR1.getText();
+        if(respuesta.equals(pregunta.))
     }//GEN-LAST:event_botonRespuesta1ActionPerformed
 
     private void botonRespuesta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRespuesta2ActionPerformed
@@ -464,18 +570,25 @@ public class Partida extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         PartidaLogica partida = new PartidaLogica();
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Partida(partida).setVisible(true);
-                } catch (ClassNotFoundException ex) {
-                    System.getLogger(Partida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                } catch (Excepciones ex) {
-                    System.getLogger(Partida.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                }
-            }
-        });
+
+/* Create and display the form */
+java.awt.EventQueue.invokeLater(new Runnable() {
+    public void run() {
+        try {
+            Partida ventana = new Partida(partida); 
+            ventana.setVisible(true);
+
+            ventana.iniciarPartida();  
+
+        } catch (ClassNotFoundException | Excepciones ex) {
+            System.getLogger(Partida.class.getName());
+        }
+    }
+});
+        
+
+       
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -485,20 +598,15 @@ public class Partida extends javax.swing.JFrame {
     private javax.swing.JButton botonRespuesta3;
     private javax.swing.JButton botonRespuesta4;
     private javax.swing.JButton botonSalir;
-    private javax.swing.JLabel catText1;
-    private javax.swing.JLabel catTextBase1;
-    private javax.swing.JLabel catTextShadow1;
+    private javax.swing.JLabel cat1;
+    private javax.swing.JLabel cat2;
+    private javax.swing.JLabel cat3;
     private javax.swing.JLabel exitBo;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel menuText;
     private javax.swing.JLabel menuTextBase;
     private javax.swing.JLabel menuTextShadow;
-    private javax.swing.JTextField miTextArea;
-    private javax.swing.JTextField miTextArea1;
-    private javax.swing.JTextField miTextArea2;
-    private javax.swing.JTextField miTextArea3;
-    private javax.swing.JTextField miTextArea4;
     private javax.swing.JLabel puntos;
     private javax.swing.JLabel puntosBase;
     private javax.swing.JLabel puntosShadow;
@@ -508,12 +616,17 @@ public class Partida extends javax.swing.JFrame {
     private javax.swing.JLabel tCatText2;
     private javax.swing.JLabel tCatTextBase2;
     private javax.swing.JLabel tCatTextShadow2;
+    private javax.swing.JTextField textPregunta;
+    private javax.swing.JTextField textR1;
+    private javax.swing.JTextField textR2;
+    private javax.swing.JTextField textR3;
+    private javax.swing.JTextField textR4;
     private javax.swing.JLabel triviaRespuesta2;
     private javax.swing.JLabel triviaRespuesta3;
     private javax.swing.JLabel triviaRespuesta5;
     private javax.swing.JLabel triviaRespuesta6;
-    private javax.swing.JLabel ursText1;
-    private javax.swing.JLabel usrTextBase1;
-    private javax.swing.JLabel usrTextShadow1;
+    private javax.swing.JLabel usuario1;
+    private javax.swing.JLabel usuario2;
+    private javax.swing.JLabel usuario3;
     // End of variables declaration//GEN-END:variables
 }
