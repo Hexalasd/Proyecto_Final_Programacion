@@ -40,6 +40,7 @@ public class Categorias extends javax.swing.JFrame {
     public Categorias() throws ClassNotFoundException, Excepciones {
         initComponents();
         juego = Juego.getInstance();
+        modelo = new DefaultListModel();
         jList1.setModel(modelo);
         for (Categoria c : juego.getCategorias()){
             modelo.addElement(c.getNombre());
@@ -265,15 +266,9 @@ public class Categorias extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        try {
-            Menu entrada = new Menu();
-            entrada.setVisible(true);
-            this.dispose();
-        } catch (ClassNotFoundException ex) {
-            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (Excepciones ex) {
-            System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
+        Configuracion conf = new Configuracion();
+        conf.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void añadirCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirCatActionPerformed
@@ -307,7 +302,12 @@ public class Categorias extends javax.swing.JFrame {
             String opcion = JOptionPane.showInputDialog(this, "Seguro que quiere eliminar la categoria "+categoria.getNombre()+"? (si/no)");
             if (opcion.equals("si")){
                 modelo.remove(seleccionado);
-                juego.getCategorias().remove(jList1.getSelectedIndex());
+                juego.delCategoria(categoria);
+                try {
+                    juego.guardarColeccion();
+                } catch (Excepciones ex) {
+                    System.getLogger(Categorias.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(this, "Operacion cancelada");
 
